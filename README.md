@@ -1,2 +1,2 @@
 # EMO
-Predicting the effect of mutations on gene expression using deep learning
+Predicting the effect of non-coding mutations on quantitative gene expression using deep learning

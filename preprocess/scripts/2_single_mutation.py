@@ -6,7 +6,7 @@ pd.set_option('display.max_columns', None)
 
 '''
 # test 
-file_path = 'E:/SNP_eQTL_rawdata/GTEx_Analysis_v8_EUR_eQTL_all_associations/'
+file_path = '../../datasets/GTEx_Analysis_v8_EUR_eQTL_all_associations/'
 bulk = 'Adipose_Subcutaneous'
 data = read_parquet(file_path + bulk + '/GTEx_Analysis_v8_QTLs_GTEx_Analysis_v8_EUR_eQTL_all_associations_' + bulk + '.v8.EUR.allpairs.chr1.parquet')
 #print(data.count())
@@ -32,10 +32,10 @@ for i in range(20):
     print(pos_fasta)
 '''
 
-fasta_path = 'E:/SNP_eQTL_rawdata/chr_fasta_hg38/'
-file_path = 'dataset/0_ppc_0.001/'
-file_path_2 = 'dataset/1_pval_0.5_single_mutation/'
-with open("0_gtex_list.txt") as r:
+fasta_path = '../../datasets/chr_fasta_hg38/'
+file_path = '../../datasets/0_ppc_0.001/'
+#file_path_2 = '../../datasets/1_pval_0.5_single_mutation/'
+with open("../0_gtex_list.txt") as r:
     lines = r.readlines()
     gtex_bulk_list = []
     for line in lines:
@@ -59,13 +59,13 @@ for bulk in gtex_bulk_list:
                 data = data[~data['variant_id'].isin([variant_id])]
         print(data)
         data = data.reset_index()
-        new_file_down = 'D:/eQTL_SNP/dataset/1_ppc_0.001_single_mutation/' + bulk + '_' + str(chr_no) + '.pkl'
+        new_file_down = '../../datasets/1_ppc_0.001_single_mutation/' + bulk + '_' + str(chr_no) + '.pkl'
         data.to_pickle(new_file_down)
 
 
 '''
 # count
-file_path_3 = 'dataset/1_ppc_0.001_single_mutation/'
+file_path_3 = '../../datasets/1_ppc_0.001_single_mutation/'
 
 for bulk in gtex_bulk_list:
     count = 0

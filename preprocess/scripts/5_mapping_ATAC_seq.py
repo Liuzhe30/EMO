@@ -2,12 +2,13 @@
 import pandas as pd
 from pandas import read_parquet
 import pyBigWig
+import numpy as np
 pd.set_option('display.max_columns', None)
 #pd.set_option('display.max_rows', None)
 
-atac_path = 'epimap_ATAC_tissue_new/'
-new_path = '3_ATAC_0.9/'
-file_path = '2_ppc_0.9_seq_mapping/'
+atac_path = '../../datasets/epimap_ATAC_tissue_new/'
+new_path = '../../datasets/3_ATAC_0.9/'
+file_path = '../../datasets/2_ppc_0.9_seq_mapping/'
 
 gtex_bulk_list = ['Adipose_Subcutaneous','Artery_Tibial','Brain_Cerebellum','Brain_Cortex','Liver','Nerve_Tibial','Ovary','Prostate','Spleen','Testis']
 

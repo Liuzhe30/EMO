@@ -4,10 +4,12 @@ from pandas import read_parquet
 pd.set_option('display.max_columns', None)
 #pd.set_option('display.max_rows', None)
 
-file_path = 'dataset/3_ATAC_0.9/'
-file_path2 = 'dataset/3_ATAC_0.9_0/'
+file_path = '../../datasets/3_ATAC_0.9/'
+file_path2 = '../../datasets/3_ATAC_0.9_0/'
+# 3_ATAC_0.9_0: slope < 0 
+# 3_ATAC_0.9_1: slope > 0 
 
-with open("0_gtex_list.txt") as r:
+with open("../0_gtex_list.txt") as r:
     lines = r.readlines()
     gtex_bulk_list = []
     for line in lines:

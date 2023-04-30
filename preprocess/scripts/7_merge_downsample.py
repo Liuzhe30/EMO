@@ -27,21 +27,21 @@ for bulk in gtex_bulk_list:
         bulk_frame = pd.concat([bulk_frame, data])
     bulk_frame.to_pickle(datasets_path + 'enhancer/' + bulk + '.pkl')
 
-# Esophagus_Mucosa : 5%
 bulk_frame = pd.DataFrame()
 for chr_no in range(1, 23):
     data = pd.read_pickle(enhancer_path + 'Esophagus_Mucosa' + '_' + str(chr_no) + '.pkl')
     bulk_frame = pd.concat([bulk_frame, data])
-bulk_frame = bulk_frame.sample(frac=0.05).reset_index(drop=True)
+shuffle_df = bulk_frame.sample(frac=1).reset_index(drop=True)
+bulk_frame = shuffle_df[0:715].reset_index(drop=True)
 bulk_frame.to_pickle(datasets_path + 'enhancer/' + 'Esophagus_Mucosa' + '.pkl')
 print('Esophagus_Mucosa enhancer: ', bulk_frame.shape)
 
-# Esophagus_Mucosa : 5%
 bulk_frame = pd.DataFrame()
 for chr_no in range(1, 23):
     data = pd.read_pickle(enhancer_path + 'Heart_Left_Ventricle' + '_' + str(chr_no) + '.pkl')
     bulk_frame = pd.concat([bulk_frame, data])
-bulk_frame = bulk_frame.sample(frac=0.08).reset_index(drop=True)
+shuffle_df = bulk_frame.sample(frac=1).reset_index(drop=True)
+bulk_frame = shuffle_df[0:715].reset_index(drop=True)
 bulk_frame.to_pickle(datasets_path + 'enhancer/' + 'Heart_Left_Ventricle' + '.pkl')
 print('Heart_Left_Ventricle enhancer: ', bulk_frame.shape)
 
@@ -55,20 +55,20 @@ for bulk in gtex_bulk_list:
         bulk_frame = pd.concat([bulk_frame, data])
     bulk_frame.to_pickle(datasets_path + 'repressor/' + bulk + '.pkl')
 
-# Esophagus_Mucosa : 5%
 bulk_frame = pd.DataFrame()
 for chr_no in range(1, 23):
     data = pd.read_pickle(repressor_path + 'Esophagus_Mucosa' + '_' + str(chr_no) + '.pkl')
     bulk_frame = pd.concat([bulk_frame, data])
-bulk_frame = bulk_frame.sample(frac=0.05).reset_index(drop=True)
+shuffle_df = bulk_frame.sample(frac=1).reset_index(drop=True)
+bulk_frame = shuffle_df[0:648].reset_index(drop=True)
 bulk_frame.to_pickle(datasets_path + 'repressor/' + 'Esophagus_Mucosa' + '.pkl')
 print('Esophagus_Mucosa repressor: ', bulk_frame.shape)
 
-# Esophagus_Mucosa : 5%
 bulk_frame = pd.DataFrame()
 for chr_no in range(1, 23):
     data = pd.read_pickle(repressor_path + 'Heart_Left_Ventricle' + '_' + str(chr_no) + '.pkl')
     bulk_frame = pd.concat([bulk_frame, data])
-bulk_frame = bulk_frame.sample(frac=0.08).reset_index(drop=True)
+shuffle_df = bulk_frame.sample(frac=1).reset_index(drop=True)
+bulk_frame = shuffle_df[0:648].reset_index(drop=True)
 bulk_frame.to_pickle(datasets_path + 'repressor/' + 'Heart_Left_Ventricle' + '.pkl')
 print('Heart_Left_Ventricle repressor: ', bulk_frame.shape)

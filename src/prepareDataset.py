@@ -1,4 +1,4 @@
-# prepare .npy datasets with shuffle
+# prepare .npy datasets with shuffle (easy to OOM, Data Generator is suggested)
 import pandas as pd
 import numpy as np
 pd.set_option('display.max_columns', None)
@@ -105,14 +105,12 @@ def pkl2npy(model_size):
             np.save('../datasets/' + model_size + '/ori/test_atac_bet.npy', np_atac_bet)
             np.save('../datasets/' + model_size + '/ori/test_label.npy', np_label)
 
-
 def augmentation():
     pass
-
 
 if __name__ == '__main__':
     
     pkl2npy('small')   
     pkl2npy('middle')
-    pkl2npy('large')
-    pkl2npy('huge')                                                                                                                 
+    #pkl2npy('large') # easy to OOM
+    #pkl2npy('huge')  # easy to OOM                                                                                                               

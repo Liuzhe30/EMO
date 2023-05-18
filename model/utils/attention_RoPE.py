@@ -16,7 +16,7 @@
 
 from absl import logging
 from . import recompute_grad
-from . import utils_emo as utils
+from . import utils_bigbird as utils
 import numpy as np
 import tensorflow.compat.v2 as tf
 from .rotary_embedding import apply_rotary_emb, RotaryEmbedding

@@ -172,7 +172,7 @@ def pkl2npy(model_size): # prepare .npy datasets with shuffle (easy to OOM, Data
             bet_seq.append(seq_list)
 
             seq_list = []
-            for item in seq_between_variant_tss:
+            for item in atac_between:
                 seq_list.append(item)
             atac_bet.append(seq_list)
 

@@ -3,6 +3,7 @@
 *.model
 *.npy
 datasets/
+model/weights/
 
 # middle scripts
 

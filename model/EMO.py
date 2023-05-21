@@ -40,7 +40,20 @@ class TransformerBlock(layers.Layer):
         self.projection_layer = bigbird_utils.Dense3dProjLayer(
                       num_heads, size_per_head,
                       bigbird_utils.create_initializer(initializer_range), None,
-                      "dense", use_bias)        
+                      "dense", use_bias)   
+
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.ff_dim = ff_dim
+
+    def get_config(self):
+        config = super().get_config().copy()
+        config.update({
+              'embed_dim': self.embed_dim,
+              'num_heads': self.num_heads,
+              'ff_dim': self.ff_dim,
+            })
+        return config   
 
     def call(self, inputs, attention_mask=None, band_mask=None, from_mask=None, to_mask=None, input_blocked_mask=None, training=True): # transformer encoder
         # masks:[attention_mask, band_mask, from_mask, to_mask, input_blocked_mask]
@@ -90,21 +103,21 @@ def build_EMO_small():
     seq_embed_dim_bet = 48
 
     ####### inputs (from data generator)
-    input1 = Input(shape=(window_len, 4)) # 51 seq-before-mutation
-    input2 = Input(shape=(window_len, 4)) # 51 seq-after-mutation
-    input3 = Input(shape=(window_len,)) # 51 atac
+    input1 = Input(shape=(window_len, 4), name = 'input_before_51') # 51 seq-before-mutation
+    input2 = Input(shape=(window_len, 4), name = 'input_after_51') # 51 seq-after-mutation
+    input3 = Input(shape=(window_len,), name = 'input_atac_51') # 51 atac
 
-    input4 = Input(shape=(maxlen, 4)) # maxlen variant-tss-between-seq
-    input5 = Input(shape=(maxlen,)) # maxlen variant-tss-between-atac
+    input4 = Input(shape=(maxlen, 4), name = 'input_bet_seq') # maxlen variant-tss-between-seq
+    input5 = Input(shape=(maxlen,), name = 'input_atac_bet') # maxlen variant-tss-between-atac
 
-    input6 = Input(shape=(maxlen,)) # mask-seq-between
-    input7 = Input(shape=(window_len,)) # mask-seq-51
+    input6 = Input(shape=(window_len,), name = 'input_mask1') # mask-seq-51
+    input7 = Input(shape=(maxlen,), name = 'input_mask2') # mask-seq-between
 
     ####### merge inputs of the same scale
-    new_input3 = layers.Reshape((window_len,1))(input3)
+    new_input3 = layers.Reshape((window_len,1), name = 'reshape_input_51')(input3)
     input_mut = layers.concatenate([input1, input2, new_input3], axis=-1)
     #print('input_mut.get_shape()', input_mut.get_shape()) # (None, 51, 9)
-    new_input5 = layers.Reshape((maxlen,1))(input5)
+    new_input5 = layers.Reshape((maxlen,1), name = 'reshape_input_between')(input5)
     input_between = layers.concatenate([input4, new_input5], axis=-1)
     #print('input_between.get_shape()', input_between.get_shape()) # (None, 1000, 5)
 
@@ -118,13 +131,13 @@ def build_EMO_small():
     position_embedding_between_seq = tf.keras.layers.Embedding(input_dim=maxlen, output_dim=64, trainable=False,
                                         weights=[ini_position])(input_between)
     #print('position_embedding_between_seq.get_shape()', position_embedding_between_seq.get_shape()) # (None, 1000, 5, 64)
-    position_embedding_between_seq = tf.keras.layers.Reshape((maxlen, -1))(position_embedding_between_seq)
+    position_embedding_between_seq = tf.keras.layers.Reshape((maxlen, -1), name = 'reshape_embedding_between_seq')(position_embedding_between_seq)
     #print('position_embedding_between_seq.get_shape()', position_embedding_between_seq.get_shape()) # (None, 1000, 320)
     
     gru_out = layers.Bidirectional(layers.GRU(160, activation='tanh', recurrent_activation='sigmoid', use_bias=True, return_sequences=True))(position_embedding_between_seq)
     #print('gru_out.get_shape()', gru_out.get_shape()) # (None, 1000, 320)
 
-    [attention_mask_bet, from_mask_bet, to_mask_bet, block_mask_bet, band_mask_bet] = create_bbmask(input6, maxlen, block_size)
+    [attention_mask_bet, from_mask_bet, to_mask_bet, block_mask_bet, band_mask_bet] = create_bbmask(input7, maxlen, block_size)
     trans_block_bet1 = TransformerBlock(maxlen, block_size, gru_out.get_shape()[-1]//num_heads, embed_dim, num_heads, ff_dim)
     bet1 = trans_block_bet1(gru_out, attention_mask=attention_mask_bet, band_mask=band_mask_bet, from_mask=from_mask_bet, to_mask=to_mask_bet, input_blocked_mask=block_mask_bet)
     #print('bet1.get_shape()', bet1.get_shape()) # bet1.get_shape() (None, 1000, 320)
@@ -152,3 +165,15 @@ def build_EMO_small():
     
     model = Model(inputs=[input1, input2, input3, input4, input5, input6, input7], outputs=output)
     return model
+
+
+def build_EMO_middle():
+    pass
+
+
+def build_EMO_large():
+    pass
+
+
+def build_EMO_huge():
+    pass

@@ -11,9 +11,9 @@ class dataGenerator():
         self.batch_size = batch_size
         self.model_size = model_size
 
-        # 1-d label: sigmoid       
-        self.label_dict = {'0':0, # Enhancer
-                            '1':1, # Repressor
+        # 2-d label: one-hot       
+        self.label_dict = {'0':[1,0], # Enhancer
+                            '1':[0,1], # Repressor
                             }
 
         self.gene_dict = {'A':[0,0,0,1], 'T':[0,0,1,0], 'C':[0,1,0,0], 'G':[1,0,0,0], 
@@ -54,18 +54,28 @@ class dataGenerator():
                     dataY_batch.append(self.label_dict[label])
 
                     # generate input_51 
-                    variant_51_seq = self.dataset['variant_51_seq'].values[j]
-                    variant_51_seq_after_mutation = self.dataset['variant_51_seq_after_mutation'].values[j] 
-                    atac_variant_51 = list(self.dataset['atac_variant_51'].values[j])
+                    seq_list = []
+                    value = self.dataset['variant_51_seq'].values[j]
+                    for strr in value:
+                        seq_list.append(self.gene_dict[strr])
+                    before_51.append(seq_list)
 
-                    before_51.append(variant_51_seq)
-                    after_51.append(variant_51_seq_after_mutation)
-                    atac_51.append(atac_variant_51)
+                    seq_list = []
+                    value = self.dataset['variant_51_seq_after_mutation'].values[j] 
+                    for strr in value:
+                        seq_list.append(self.gene_dict[strr])
+                    after_51.append(seq_list)
+
+                    seq_list = []
+                    value = list(self.dataset['atac_variant_51'].values[j])
+                    for item in value:
+                        seq_list.append(item)
+                    atac_51.append(seq_list)
 
                     # generate mask_51 
                     mask1_sample = []
                     for idx in range(51):
-                        line = copy.copy(self.mask_dict[variant_51_seq[idx]])  
+                        line = copy.copy(self.mask_dict[self.dataset['variant_51_seq'].values[j][idx]])  
                         mask1_sample.append(line)
                     mask1_batch.append(mask1_sample)  
 
@@ -75,8 +85,15 @@ class dataGenerator():
                     atac_between = list(self.dataset['atac_between'].values[j])
                     atac_between = atac_between + [0] * (padding - len(atac_between))   
 
-                    bet_seq.append(seq_between_variant_tss)
-                    atac_bet.append(atac_between)
+                    seq_list = []
+                    for strr in seq_between_variant_tss:
+                        seq_list.append(self.gene_dict[strr])
+                    bet_seq.append(seq_list)
+
+                    seq_list = []
+                    for item in atac_between:
+                        seq_list.append(item)
+                    atac_bet.append(seq_list)
 
                     # generate mask_bet
                     mask2_sample = []
@@ -95,5 +112,76 @@ class dataGenerator():
                 input_mask2 = np.array(mask2_batch)
 
                 i += self.batch_size
-
+                
                 yield ([input_before_51, input_after_51, input_atac_51, input_bet_seq, input_atac_bet, input_mask1, input_mask2], y)
+
+    def generate_validation(self):
+        # fetch padding
+        padding = self.check_padding()
+        
+        before_51, after_51, bet_seq, atac_51, atac_bet, dataY_batch, mask1_batch, mask2_batch = [], [], [], [], [], [], [], []
+        for j in range(len(self.dataset)):
+
+            # generate label
+            label = str(self.dataset['label'].values[j])
+            dataY_batch.append(self.label_dict[label])
+
+            # generate input_51 
+            seq_list = []
+            value = self.dataset['variant_51_seq'].values[j]
+            for strr in value:
+                seq_list.append(self.gene_dict[strr])
+            before_51.append(seq_list)
+
+            seq_list = []
+            value = self.dataset['variant_51_seq_after_mutation'].values[j] 
+            for strr in value:
+                seq_list.append(self.gene_dict[strr])
+            after_51.append(seq_list)
+
+            seq_list = []
+            value = list(self.dataset['atac_variant_51'].values[j])
+            for item in value:
+                seq_list.append(item)
+            atac_51.append(seq_list)
+
+            # generate mask_51 
+            mask1_sample = []
+            for idx in range(51):
+                line = copy.copy(self.mask_dict[self.dataset['variant_51_seq'].values[j][idx]])  
+                mask1_sample.append(line)
+            mask1_batch.append(mask1_sample)  
+
+            # generate input_bet
+            seq_between_variant_tss = self.dataset['seq_between_variant_tss'].values[j]
+            seq_between_variant_tss = seq_between_variant_tss.ljust(padding,'P')
+            atac_between = list(self.dataset['atac_between'].values[j])
+            atac_between = atac_between + [0] * (padding - len(atac_between))   
+
+            seq_list = []
+            for strr in seq_between_variant_tss:
+                seq_list.append(self.gene_dict[strr])
+            bet_seq.append(seq_list)
+
+            seq_list = []
+            for item in seq_between_variant_tss:
+                seq_list.append(item)
+            atac_bet.append(seq_list)
+
+            # generate mask_bet
+            mask2_sample = []
+            for idx in range(padding):
+                line = copy.copy(self.mask_dict[seq_between_variant_tss[idx]])   
+                mask2_sample.append(line)
+            mask2_batch.append(mask2_sample)  
+
+        input_before_51 = np.array(before_51)
+        input_after_51 = np.array(after_51)
+        input_atac_51 = np.array(atac_51)
+        input_bet_seq = np.array(bet_seq)
+        input_atac_bet = np.array(atac_bet)
+        y = np.array(dataY_batch)
+        input_mask1 = np.array(mask1_batch)
+        input_mask2 = np.array(mask2_batch)
+
+        return ([input_before_51, input_after_51, input_atac_51, input_bet_seq, input_atac_bet, input_mask1, input_mask2], y)

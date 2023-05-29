@@ -948,11 +948,13 @@ class MultiHeadedAttentionLayer(tf.keras.layers.Layer):
         # `value_layer` = [b, h, n, d]
         value = self.value_layer(to_tensor)
         
+        '''
         #print("query: " + str(query))
         #print("inputs: " + str(to_tensor))
         # apply the rotations to your queries and keys after the heads have been split out, but prior to the dot product and subsequent softmax (attention)
         query = apply_rotary_emb(to_tensor, query)
-        key = apply_rotary_emb(to_tensor, key)        
+        key = apply_rotary_emb(to_tensor, key)   
+        '''     
 
         if cache is not None and decode_i is not None:
             max_len = utils.get_shape_list(cache["k"])[2]

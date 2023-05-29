@@ -22,7 +22,7 @@ if __name__ == "__main__":
     parser.add_argument('-m', '--model_size', default='small')
     parser.add_argument('-a', '--augmentation', default='False')
     parser.add_argument('--epochs', default=100, type=int)
-    parser.add_argument('--lr', default=0.001, type=float,
+    parser.add_argument('--lr', default=0.002, type=float,
                         help="Initial learning rate")
     parser.add_argument('--lr_decay', default=0.05, type=float,
                         help="The value multiplied by lr at each epoch. Set a larger value for larger epochs") 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
     # check model size
     if(model_size == 'small'):
-        batch_size = 128
+        batch_size = 16
         model = build_EMO_small()
     elif(model_size == 'middle'):
         batch_size = 128
@@ -81,7 +81,8 @@ if __name__ == "__main__":
           steps_per_epoch = len(train_data)/batch_size,
           epochs = args.epochs, verbose=1,
           validation_data = validGenerator.generate_validation(),
-          callbacks = [log, tensorboard, checkpoint, lr_decay],
+          #callbacks = [log, tensorboard, checkpoint, lr_decay],
+          callbacks = [log, tensorboard, checkpoint],
           shuffle = True,
           #class_weight = class_weights,
           #batch_size=args.batch_size,

@@ -116,6 +116,7 @@ class dataGenerator():
                 yield ([input_before_51, input_after_51, input_atac_51, input_bet_seq, input_atac_bet, input_mask1, input_mask2], y)
 
     def generate_validation(self):
+
         # fetch padding
         padding = self.check_padding()
         
@@ -164,7 +165,7 @@ class dataGenerator():
             bet_seq.append(seq_list)
 
             seq_list = []
-            for item in seq_between_variant_tss:
+            for item in atac_between:
                 seq_list.append(item)
             atac_bet.append(seq_list)
 

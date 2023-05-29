@@ -155,13 +155,13 @@ def build_EMO_small():
     #print('dense_mut.get_shape()', dense_mut.get_shape()) 
 
     ##### merge between & mutation branch
-    merged = layers.concatenate([bet1, dense_mut], axis=1)
+    merged = layers.concatenate([bet2, dense_mut], axis=1)
     #print('merged.get_shape()', merged.get_shape()) # (None, 1001, 320)
     merged = layers.Dense(128)(merged)
     merged = layers.Dense(32)(merged)
     merged = layers.Flatten()(merged)
     merged = layers.Dense(32)(merged)
-    output = layers.Dense(2, activation = 'softmax', name = 'output_softmax')(merged)
+    output = layers.Dense(2, activation = 'softmax')(merged)
     
     model = Model(inputs=[input1, input2, input3, input4, input5, input6, input7], outputs=output)
     return model

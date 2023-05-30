@@ -16,6 +16,16 @@ from tensorflow.keras.layers import Input
 from model.EMO import *
 from src.dataGenerator import dataGenerator
 
+# for gpu training
+os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+    except RuntimeError as e:
+        print(e)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -47,16 +57,16 @@ if __name__ == "__main__":
 
     # check model size
     if(model_size == 'small'):
-        batch_size = 16
+        batch_size = 32
         model = build_EMO_small()
     elif(model_size == 'middle'):
-        batch_size = 16
+        batch_size = 32
         model = build_EMO_middle()
     elif(model_size == 'large'):
-        batch_size = 16
+        batch_size = 32
         model = build_EMO_large()
     elif(model_size == 'huge'):
-        batch_size = 16
+        batch_size = 32
         model = build_EMO_huge()
 
     model.summary()

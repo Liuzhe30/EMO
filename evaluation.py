@@ -54,10 +54,11 @@ def predicting(model_size, pattern):
     label = testGenerator.generate_validation()[1]
     
     # save prediction output
-    np.save('model/pred_results/' + model_size + '/predict.npy', results)
-    np.save('model/pred_results/' + model_size + '/label.npy', label)
+    np.save('model/pred_results/' + model_size + '/' + pattern + 'predict.npy', results)
+    np.save('model/pred_results/' + model_size + '/' + pattern + 'label.npy', label)
     
 
 if __name__=='__main__':
 
     predicting('small','')
+    predicting('small','rev_')

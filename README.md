@@ -8,3 +8,11 @@ Predicting the effect of non-coding mutations on quantitative gene expression us
 - Tensorflow-gpu == 2.7
 - Protobuf == 3.20
 - Scikit-learn == 1.1
+
+## Model weights
+model|trained weights
+	:---:|:---:
+	Small|[Download]()
+	Middle|[Download]()
+	Large|[Download]()
+	Huge|[Download]()

@@ -10,9 +10,9 @@ Predicting the effect of non-coding mutations on quantitative gene expression us
 - Scikit-learn == 1.1
 
 ## Model weights
-model|trained weights
-	:---:|:---:
-	Small|[Download]()
-	Middle|[Download]()
-	Large|[Download]()
-	Huge|[Download]()
+|model|trained weights|
+|:---:|:---:|
+|Small|[Download]()|
+|Middle|[Download]()|
+|Large|[Download]()|
+|Huge|[Download]()|

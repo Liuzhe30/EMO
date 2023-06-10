@@ -17,7 +17,7 @@ from model.EMO import *
 from src.dataGenerator import dataGenerator
 
 # for gpu training
-os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
+# os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
     try:
@@ -25,7 +25,6 @@ if gpus:
             tf.config.experimental.set_memory_growth(gpu, True)
     except RuntimeError as e:
         print(e)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -72,8 +71,8 @@ if __name__ == "__main__":
     model.summary()
     
     # callbacks
-    log = tf.keras.callbacks.CSVLogger(args.save_dir + '/log.csv')
-    tensorboard = tf.keras.callbacks.TensorBoard(log_dir=args.save_dir + '/tensorboard-logs', histogram_freq=int(args.debug))
+    log = tf.keras.callbacks.CSVLogger(args.save_dir + model_size + '/log.csv')
+    tensorboard = tf.keras.callbacks.TensorBoard(log_dir=args.save_dir + model_size + '/tensorboard-logs', histogram_freq=int(args.debug))
     #EarlyStopping = callbacks.EarlyStopping(monitor='val_cc2', min_delta=0.01, patience=5, verbose=0, mode='max', baseline=None, restore_best_weights=True)
     checkpoint = tf.keras.callbacks.ModelCheckpoint(args.save_dir + model_size + '/weights-{epoch:02d}.tf', monitor='val_acc', mode='max', #val_categorical_accuracy val_acc
                                        save_best_only=True, save_weights_only=True, verbose=1)        
@@ -85,20 +84,21 @@ if __name__ == "__main__":
               metrics=['mae', 'acc'])
     
     trainGenerator = dataGenerator(train_data, batch_size, model_size)
-    validGenerator = dataGenerator(test_data, batch_size, model_size)
+    validGenerator = dataGenerator(valid_data, batch_size, model_size)
     
     history = model.fit(trainGenerator.generate_batch(), # Tf2 new feature
           steps_per_epoch = len(train_data)/batch_size,
           epochs = args.epochs, verbose=1,
-          validation_data = validGenerator.generate_validation(),
+          validation_data = validGenerator.generate_batch(),
+          validation_steps = len(valid_data)/batch_size,
           #callbacks = [log, tensorboard, checkpoint, lr_decay],
-          callbacks = [log, tensorboard, checkpoint],
+          callbacks = [log, checkpoint],
           shuffle = True,
           #class_weight = class_weights,
           #batch_size=args.batch_size,
           workers = 1).history
 
-    model.save_weights(args.save_dir + args.model_size + '_trained_weights.tf')
+    model.save_weights(args.save_dir + args.model_size + '/' + args.model_size + '_trained_weights.tf')
     #model.save(args.save_dir + '/trained_model.tf')
     print('Trained model saved to \'%s/trained_model.tf\'' % args.save_dir)
     

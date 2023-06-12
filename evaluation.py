@@ -27,10 +27,9 @@ def evaluate(target_model, data):
 	_, acc = target_model.evaluate(data)
 	print("Restore model, accuracy: {:5.2f}%".format(100*acc))
 
-def predicting(model_size, pattern): 
-    # pattern: '' or 'rev_'
+def predicting(model_size): 
 
-    test_data = pd.read_pickle('datasets/' + model_size + '/test_' + pattern + model_size + '.pkl')
+    test_data = pd.read_pickle('datasets/' + model_size + '/test_' + model_size + '.pkl')
     
     # check model size
     if(model_size == 'small'):
@@ -54,11 +53,13 @@ def predicting(model_size, pattern):
     label = testGenerator.generate_validation()[1]
     
     # save prediction output
-    np.save('model/pred_results/' + model_size + '/' + pattern + 'predict.npy', results)
-    np.save('model/pred_results/' + model_size + '/' + pattern + 'label.npy', label)
+    np.save('model/pred_results/' + model_size + '/' + 'predict.npy', results)
+    np.save('model/pred_results/' + model_size + '/' + 'label.npy', label)
     
 
 if __name__=='__main__':
 
-    predicting('small','')
-    predicting('small','rev_')
+    predicting('small')
+    predicting('middle')
+    predicting('large')
+    predicting('huge') # need large cpu memory

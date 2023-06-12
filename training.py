@@ -29,7 +29,6 @@ if gpus:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--model_size', default='small')
-    parser.add_argument('-a', '--augmentation', default='False')
     parser.add_argument('--epochs', default=100, type=int)
     parser.add_argument('--lr', default=0.002, type=float,
                         help="Initial learning rate")
@@ -43,10 +42,7 @@ if __name__ == "__main__":
     augmentation = args.augmentation
 
     # load datasets
-    if(augmentation == 'False'):
-        train_pkl = pd.read_pickle('datasets/' + model_size + '/train_' + model_size + '.pkl')
-    elif(augmentation == 'True'):
-        train_pkl = pd.read_pickle('datasets/' + model_size + '/train_aug_' + model_size + '.pkl')
+    train_pkl = pd.read_pickle('datasets/' + model_size + '/train_' + model_size + '.pkl')
     test_pkl = pd.read_pickle('datasets/' + model_size + '/test_' + model_size + '.pkl')
 
     # split train/validation
@@ -56,27 +52,27 @@ if __name__ == "__main__":
 
     # check model size
     if(model_size == 'small'):
-        batch_size = 32
+        batch_size = 16
         model = build_EMO_small()
     elif(model_size == 'middle'):
-        batch_size = 32
+        batch_size = 8
         model = build_EMO_middle()
     elif(model_size == 'large'):
-        batch_size = 32
+        batch_size = 8
         model = build_EMO_large()
     elif(model_size == 'huge'):
-        batch_size = 32
+        batch_size = 4
         model = build_EMO_huge()
 
     model.summary()
     
     # callbacks
     log = tf.keras.callbacks.CSVLogger(args.save_dir + model_size + '/log.csv')
-    tensorboard = tf.keras.callbacks.TensorBoard(log_dir=args.save_dir + model_size + '/tensorboard-logs', histogram_freq=int(args.debug))
+    #tensorboard = tf.keras.callbacks.TensorBoard(log_dir=args.save_dir + model_size + '/tensorboard-logs', histogram_freq=int(args.debug))
     #EarlyStopping = callbacks.EarlyStopping(monitor='val_cc2', min_delta=0.01, patience=5, verbose=0, mode='max', baseline=None, restore_best_weights=True)
     checkpoint = tf.keras.callbacks.ModelCheckpoint(args.save_dir + model_size + '/weights-{epoch:02d}.tf', monitor='val_acc', mode='max', #val_categorical_accuracy val_acc
                                        save_best_only=True, save_weights_only=True, verbose=1)        
-    lr_decay = tf.keras.callbacks.LearningRateScheduler(schedule=lambda epoch: args.lr * (args.lr_decay ** epoch))
+    #lr_decay = tf.keras.callbacks.LearningRateScheduler(schedule=lambda epoch: args.lr * (args.lr_decay ** epoch))
 
     # Train the model and save it
     model.compile(loss='binary_crossentropy', 

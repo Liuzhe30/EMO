@@ -30,7 +30,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--model_size', default='small')
     parser.add_argument('--epochs', default=100, type=int)
-    parser.add_argument('--lr', default=0.002, type=float,
+    parser.add_argument('--lr', default=0.005, type=float,
                         help="Initial learning rate")
     parser.add_argument('--lr_decay', default=0.05, type=float,
                         help="The value multiplied by lr at each epoch. Set a larger value for larger epochs") 
@@ -39,7 +39,6 @@ if __name__ == "__main__":
                         help="Save weights by TensorBoard")
     args = parser.parse_args()
     model_size = args.model_size
-    augmentation = args.augmentation
 
     # load datasets
     train_pkl = pd.read_pickle('datasets/' + model_size + '/train_' + model_size + '.pkl')
@@ -52,13 +51,13 @@ if __name__ == "__main__":
 
     # check model size
     if(model_size == 'small'):
-        batch_size = 16
+        batch_size = 32
         model = build_EMO_small()
     elif(model_size == 'middle'):
-        batch_size = 8
+        batch_size = 32
         model = build_EMO_middle()
     elif(model_size == 'large'):
-        batch_size = 8
+        batch_size = 16
         model = build_EMO_large()
     elif(model_size == 'huge'):
         batch_size = 4
@@ -70,7 +69,7 @@ if __name__ == "__main__":
     log = tf.keras.callbacks.CSVLogger(args.save_dir + model_size + '/log.csv')
     #tensorboard = tf.keras.callbacks.TensorBoard(log_dir=args.save_dir + model_size + '/tensorboard-logs', histogram_freq=int(args.debug))
     #EarlyStopping = callbacks.EarlyStopping(monitor='val_cc2', min_delta=0.01, patience=5, verbose=0, mode='max', baseline=None, restore_best_weights=True)
-    checkpoint = tf.keras.callbacks.ModelCheckpoint(args.save_dir + model_size + '/weights-{epoch:02d}.tf', monitor='val_acc', mode='max', #val_categorical_accuracy val_acc
+    checkpoint = tf.keras.callbacks.ModelCheckpoint(args.save_dir + args.model_size + '/' + args.model_size + '_trained_weights.tf', monitor='val_acc', mode='max', #val_categorical_accuracy val_acc
                                        save_best_only=True, save_weights_only=True, verbose=1)        
     #lr_decay = tf.keras.callbacks.LearningRateScheduler(schedule=lambda epoch: args.lr * (args.lr_decay ** epoch))
 
@@ -94,8 +93,6 @@ if __name__ == "__main__":
           #batch_size=args.batch_size,
           workers = 1).history
 
-    model.save_weights(args.save_dir + args.model_size + '/' + args.model_size + '_trained_weights.tf')
-    #model.save(args.save_dir + '/trained_model.tf')
     print('Trained model saved to \'%s/trained_model.tf\'' % args.save_dir)
     
     

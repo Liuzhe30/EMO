@@ -234,7 +234,8 @@ def build_EMO_middle():
 
     trans_block_bet2 = TransformerBlock(1000, block_size, bet1.get_shape()[-1]//num_heads, embed_dim, num_heads, ff_dim)
     bet2 = trans_block_bet2(bet1, attention_mask=attention_mask_bet, band_mask=band_mask_bet, from_mask=from_mask_bet, to_mask=to_mask_bet, input_blocked_mask=block_mask_bet)
-    #print('bet2.get_shape()', bet2.get_shape()) # bet1.get_shape() (None, 1000, 320)
+    bet3 = trans_block_bet2(bet2, attention_mask=attention_mask_bet, band_mask=band_mask_bet, from_mask=from_mask_bet, to_mask=to_mask_bet, input_blocked_mask=block_mask_bet)
+    #print('bet3.get_shape()', bet3.get_shape()) # bet3.get_shape() (None, 1000, 320)
 
     ###### mutation branch
     conv_mut = layers.Conv1D(32, 3, kernel_initializer='he_uniform')(input_mut) # (None, 49, 32)
@@ -245,7 +246,7 @@ def build_EMO_middle():
     #print('dense_mut.get_shape()', dense_mut.get_shape()) 
 
     ##### merge between & mutation branch
-    merged = layers.concatenate([bet2, dense_mut], axis=1)
+    merged = layers.concatenate([bet3, dense_mut], axis=1)
     #print('merged.get_shape()', merged.get_shape()) # (None, 1001, 320)
     merged = layers.Dense(128)(merged)
     merged = layers.Dense(32)(merged)

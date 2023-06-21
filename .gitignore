@@ -5,6 +5,8 @@
 datasets/
 model/weights/
 model/weights_enformer/
+experiment/images/
+preprocess/images/
 
 # middle scripts
 training_enformer.py

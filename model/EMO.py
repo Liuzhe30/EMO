@@ -92,15 +92,10 @@ def build_EMO_small():
     # hyper-paramaters
     maxlen = 1000
     window_len = 51
-    variant_box_len = 14
     block_size = 20
-    vocab_size = 5
     embed_dim = 64
     num_heads = 4
     ff_dim = 256
-    pos_embed_dim = 64
-    seq_embed_dim_mut = 50
-    seq_embed_dim_bet = 48
 
     ####### inputs (from data generator)
     input1 = Input(shape=(window_len, 4), name = 'input_before_51') # 51 seq-before-mutation
@@ -172,15 +167,10 @@ def build_EMO_middle():
     # hyper-paramaters
     maxlen = 10000
     window_len = 51
-    variant_box_len = 14
     block_size = 20
-    vocab_size = 5
     embed_dim = 64
     num_heads = 4
     ff_dim = 256
-    pos_embed_dim = 64
-    seq_embed_dim_mut = 50
-    seq_embed_dim_bet = 48
 
     ####### inputs (from data generator)
     input1 = Input(shape=(window_len, 4), name = 'input_before_51') # 51 seq-before-mutation
@@ -263,15 +253,10 @@ def build_EMO_large():
     # hyper-paramaters
     maxlen = 100000
     window_len = 51
-    variant_box_len = 14
     block_size = 20
-    vocab_size = 5
     embed_dim = 64
     num_heads = 4
     ff_dim = 256
-    pos_embed_dim = 64
-    seq_embed_dim_mut = 50
-    seq_embed_dim_bet = 48
 
     ####### inputs (from data generator)
     input1 = Input(shape=(window_len, 4), name = 'input_before_51') # 51 seq-before-mutation
@@ -353,15 +338,10 @@ def build_EMO_huge():
     # hyper-paramaters
     maxlen = 1000000
     window_len = 51
-    variant_box_len = 14
     block_size = 20
-    vocab_size = 5
     embed_dim = 64
     num_heads = 4
     ff_dim = 256
-    pos_embed_dim = 64
-    seq_embed_dim_mut = 50
-    seq_embed_dim_bet = 48
 
     ####### inputs (from data generator)
     input1 = Input(shape=(window_len, 4), name = 'input_before_51') # 51 seq-before-mutation
@@ -395,12 +375,12 @@ def build_EMO_huge():
     position_embedding_between_seq = tf.keras.layers.Reshape((maxlen, -1), name = 'reshape_embedding_between_seq')(position_embedding_between_seq)
     #print('position_embedding_between_seq.get_shape()', position_embedding_between_seq.get_shape()) # (None, maxlen, 320)
     
-    gru_out = layers.Bidirectional(layers.GRU(160, activation='tanh', recurrent_activation='sigmoid', use_bias=True, return_sequences=True))(position_embedding_between_seq)
-    #print('gru_out.get_shape()', gru_out.get_shape()) # (None, maxlen, 320)
+    gru_out = layers.Bidirectional(layers.GRU(64, activation='tanh', recurrent_activation='sigmoid', use_bias=True, return_sequences=True))(position_embedding_between_seq)
+    #print('gru_out.get_shape()', gru_out.get_shape()) # (None, maxlen, 128)
 
     # average pooling for between profile
     pooled = layers.AveragePooling1D(1000)(gru_out) 
-    #print('pooled.get_shape()', pooled.get_shape()) # (None, 1000, 320)
+    #print('pooled.get_shape()', pooled.get_shape()) # (None, 1000, 128)
 
     # max pooling for between masks
     reshaped = layers.Reshape((maxlen,1))(input7)
@@ -411,23 +391,23 @@ def build_EMO_huge():
     [attention_mask_bet, from_mask_bet, to_mask_bet, block_mask_bet, band_mask_bet] = create_bbmask(mask_pooling, 1000, block_size)
     trans_block_bet1 = TransformerBlock(1000, block_size, pooled.get_shape()[-1]//num_heads, embed_dim, num_heads, ff_dim)
     bet1 = trans_block_bet1(pooled, attention_mask=attention_mask_bet, band_mask=band_mask_bet, from_mask=from_mask_bet, to_mask=to_mask_bet, input_blocked_mask=block_mask_bet)
-    #print('bet1.get_shape()', bet1.get_shape()) # bet1.get_shape() (None, 1000, 320)
+    #print('bet1.get_shape()', bet1.get_shape()) # bet1.get_shape() (None, 1000, 128)
 
     trans_block_bet2 = TransformerBlock(1000, block_size, bet1.get_shape()[-1]//num_heads, embed_dim, num_heads, ff_dim)
     bet2 = trans_block_bet2(bet1, attention_mask=attention_mask_bet, band_mask=band_mask_bet, from_mask=from_mask_bet, to_mask=to_mask_bet, input_blocked_mask=block_mask_bet)
-    #print('bet2.get_shape()', bet2.get_shape()) # bet1.get_shape() (None, 1000, 320)
+    #print('bet2.get_shape()', bet2.get_shape()) # bet1.get_shape() (None, 1000, 128)
 
     ###### mutation branch
     conv_mut = layers.Conv1D(32, 3, kernel_initializer='he_uniform')(input_mut) # (None, 49, 32)
     conv_mut = layers.Conv1D(16, 3, kernel_initializer='he_uniform')(conv_mut) # (None, 47, 16)
     dense_mut = layers.Flatten()(conv_mut)
-    dense_mut = layers.Dense(320)(dense_mut)
-    dense_mut = layers.Reshape((1, 320))(dense_mut) # (None, 1, 320)
+    dense_mut = layers.Dense(128)(dense_mut)
+    dense_mut = layers.Reshape((1, 128))(dense_mut) # (None, 1, 128)
     #print('dense_mut.get_shape()', dense_mut.get_shape()) 
 
     ##### merge between & mutation branch
     merged = layers.concatenate([bet2, dense_mut], axis=1)
-    #print('merged.get_shape()', merged.get_shape()) # (None, 1001, 320)
+    #print('merged.get_shape()', merged.get_shape()) # (None, 1001, 128)
     merged = layers.Dense(128)(merged)
     merged = layers.Dense(32)(merged)
     merged = layers.Flatten()(merged)

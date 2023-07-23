@@ -375,7 +375,7 @@ def build_EMO_huge():
     position_embedding_between_seq = tf.keras.layers.Reshape((maxlen, -1), name = 'reshape_embedding_between_seq')(position_embedding_between_seq)
     #print('position_embedding_between_seq.get_shape()', position_embedding_between_seq.get_shape()) # (None, maxlen, 320)
     
-    gru_out = layers.Bidirectional(layers.GRU(64, activation='tanh', recurrent_activation='sigmoid', use_bias=True, return_sequences=True))(position_embedding_between_seq)
+    gru_out = layers.Bidirectional(layers.GRU(32, activation='tanh', recurrent_activation='sigmoid', use_bias=True, return_sequences=True))(position_embedding_between_seq)
     #print('gru_out.get_shape()', gru_out.get_shape()) # (None, maxlen, 128)
 
     # average pooling for between profile
@@ -401,8 +401,8 @@ def build_EMO_huge():
     conv_mut = layers.Conv1D(32, 3, kernel_initializer='he_uniform')(input_mut) # (None, 49, 32)
     conv_mut = layers.Conv1D(16, 3, kernel_initializer='he_uniform')(conv_mut) # (None, 47, 16)
     dense_mut = layers.Flatten()(conv_mut)
-    dense_mut = layers.Dense(128)(dense_mut)
-    dense_mut = layers.Reshape((1, 128))(dense_mut) # (None, 1, 128)
+    dense_mut = layers.Dense(64)(dense_mut)
+    dense_mut = layers.Reshape((1, 64))(dense_mut) # (None, 1, 128)
     #print('dense_mut.get_shape()', dense_mut.get_shape()) 
 
     ##### merge between & mutation branch

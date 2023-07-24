@@ -5,9 +5,12 @@
 datasets/
 model/weights/
 model/weights_enformer/
+model/weights_ablation/
 experiment/images/
 preprocess/images/
 
 # middle scripts
 training_enformer.py
 evaluation_enformer.py
+training_ablation.py
+evaluation_ablation.py

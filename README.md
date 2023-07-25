@@ -20,6 +20,7 @@ Predicting the effect of non-coding mutations on quantitative gene expression us
 ## Training and fine-tuning
 You can specify the model size through the command interface:
 ```
+cd [work_path]
 python training.py -m small --epoch 100 --lr 0.005 --save_dir model/weights/
 python finetune.py -m small -t Pancreas
 ```

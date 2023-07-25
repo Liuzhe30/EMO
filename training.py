@@ -40,6 +40,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     model_size = args.model_size
 
+    path = args.save_dir + model_size + '/'
+    if(not os.path.exists(path)):
+        os.makedirs(path)
+
     # load datasets
     train_pkl = pd.read_pickle('datasets/' + model_size + '/train_' + model_size + '.pkl')
     test_pkl = pd.read_pickle('datasets/' + model_size + '/test_' + model_size + '.pkl')

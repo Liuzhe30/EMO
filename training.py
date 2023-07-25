@@ -17,7 +17,7 @@ from model.EMO import *
 from src.dataGenerator import dataGenerator
 
 # for gpu training
-# os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
+# os.environ["CUDA_VISIBLE_DEVICES"] = '0' # may needed when DEVICE:0 is occupied, otherwise where will be an error about positional embedding
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
     try:
@@ -57,10 +57,10 @@ if __name__ == "__main__":
         batch_size = 32
         model = build_EMO_middle()
     elif(model_size == 'large'):
-        batch_size = 16
+        batch_size = 4
         model = build_EMO_large()
     elif(model_size == 'huge'):
-        batch_size = 4
+        batch_size = 2
         model = build_EMO_huge()
 
     model.summary()

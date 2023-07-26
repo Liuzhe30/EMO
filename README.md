@@ -23,7 +23,7 @@ Note: If the number of training data samples used for fine-tuning is less than 2
 |:---:|:---:|:---:|:---:|:---:|
 |Small|[Download]()|1,419,602|[Download]()|[Download]()|
 |Middle|[Download]()|2,593,298|[Download]()|[Download]()|
-|Large|[Download]()||8,353,298|[Download]()|[Download]()
+|Large|[Download]()|8,353,298|[Download]()|[Download]()|
 |Huge|[Download]()|65,355,602|[Download]()|[Download]()|
 
 ## Raw data

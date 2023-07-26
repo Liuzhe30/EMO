@@ -19,12 +19,12 @@ python finetune.py -m small -t Pancreas
 Note: If the number of training data samples used for fine-tuning is less than 200, the script will throw an exception. We recommend using our pre-trained parameters directly.
 
 ## Processed training dataset and model weights
-|model|trained weights|training data|test data|paramaters|
+|model|trained weights|parameter|processed training data|test data|
 |:---:|:---:|:---:|:---:|:---:|
-|Small|[Download]()|[Download]()|[Download]()|1,419,602|
-|Middle|[Download]()|[Download]()|[Download]()|2,593,298|
-|Large|[Download]()|[Download]()|[Download]()|8,353,298|
-|Huge|[Download]()|[Download]()|[Download]()|65,355,602|
+|Small|[Download]()|1,419,602|[Download]()|[Download]()|
+|Middle|[Download]()|2,593,298|[Download]()|[Download]()|
+|Large|[Download]()||8,353,298|[Download]()|[Download]()
+|Huge|[Download]()|65,355,602|[Download]()|[Download]()|
 
 ## Raw data
 |Data|resource|

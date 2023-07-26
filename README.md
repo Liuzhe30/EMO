@@ -24,4 +24,10 @@ python finetune.py -m small -t Pancreas
 |Middle|[Download]()|[Download]()|[Download]()|
 |Large|[Download]()|[Download]()|[Download]()|
 |Huge|[Download]()|[Download]()|[Download]()|
-You can also download the raw dataset from [here]().
+
+## Raw data
+|Data|resource|
+|:---:|:---:|
+|fine-mapping eQTL|[GTEx v8](https://gtexportal.org/home/datasets)|
+|tissue ATAC-seq|[ENCODE](https://www.encodeproject.org/atac-seq/)|
+|GRCh38/hg38 genome|[UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway)|

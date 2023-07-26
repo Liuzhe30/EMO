@@ -61,7 +61,7 @@ if __name__ == "__main__":
         batch_size = 32
         model = build_EMO_middle()
     elif(model_size == 'large'):
-        batch_size = 4
+        batch_size = 16
         model = build_EMO_large()
     elif(model_size == 'huge'):
         batch_size = 2

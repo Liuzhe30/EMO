@@ -17,7 +17,7 @@ from model.EMO import *
 from src.dataGenerator import dataGenerator
 
 # for gpu training
-# os.environ["CUDA_VISIBLE_DEVICES"] = '1,2'
+# os.environ["CUDA_VISIBLE_DEVICES"] = '1,2' # may needed when DEVICE:0 is occupied, otherwise where will be an error about positional embedding
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
     try:
@@ -55,23 +55,33 @@ if __name__ == "__main__":
     valid_data = train_pkl[int(train_pkl.shape[0]*float(8/9)):].reset_index(drop=True)
     test_data = test_pkl
 
+    # check data sample
+    if(train_data.shape[0] < 200):
+        raise Exception('Need sample of training data >= 200')
+
     # check model size
     if(model_size == 'small'):
-        batch_size = 32
+        if(train_data.shape[0] <= 300):
+            batch_size = 16
+        else:
+            batch_size = 32
         model = build_EMO_small()
     elif(model_size == 'middle'):
-        batch_size = 32
+        if(train_data.shape[0] <= 300):
+            batch_size = 16
+        else:
+            batch_size = 32
         model = build_EMO_middle()
     elif(model_size == 'large'):
-        batch_size = 4
+        batch_size = 16
         model = build_EMO_large()
 
     model.load_weights('model/weights/' + model_size + '/' + model_size + '_trained_weights.tf').expect_partial()
     model.summary()
 
-    # freeze
+    # freeze strategy
     for layer in model.layers[:-3]:
-        layer.trainable = False
+            layer.trainable = False
 
     # callbacks
     log = tf.keras.callbacks.CSVLogger(args.save_dir + model_size + '/' + tissue +  '/' + tissue + '_log.csv')

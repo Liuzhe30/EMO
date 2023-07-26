@@ -6,6 +6,7 @@ datasets/
 model/weights/
 model/weights_enformer/
 model/weights_ablation/
+model/weights_finetune/
 experiment/images/
 preprocess/images/
 

@@ -21,10 +21,10 @@ Note: If the number of training data samples used for fine-tuning is less than 2
 ## Processed training dataset and model weights
 |model|trained weights|parameter|processed training data|test data|
 |:---:|:---:|:---:|:---:|:---:|
-|Small|[Download]()|1,419,602|[Download]()|[Download]()|
-|Middle|[Download]()|2,593,298|[Download]()|[Download]()|
-|Large|[Download]()|8,353,298|[Download]()|[Download]()|
-|Huge|[Download]()|65,355,602|[Download]()|[Download]()|
+|Small|[Download](https://www.psymukb.net:83/EMO_Download/trained_weights/small/)|1,419,602|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/small/train_small.pkl)|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/small/test_small.pkl)|
+|Middle|[Download](https://www.psymukb.net:83/EMO_Download/trained_weights/middle/)|2,593,298|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/middle/train_middle.pkl)|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/middle/test_middle.pkl)|
+|Large|[Download](https://www.psymukb.net:83/EMO_Download/trained_weights/large/)|8,353,298|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/large/train_large.pkl)|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/large/test_large.pkl)|
+|Huge|[Download](https://www.psymukb.net:83/EMO_Download/trained_weights/huge/)|65,355,602|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/huge/train_huge.pkl)|[Download](https://www.psymukb.net:83/EMO_Download/training_test_set/huge/test_huge.pkl)|
 
 ## Raw data
 |Data|resource|

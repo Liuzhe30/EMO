@@ -14,9 +14,14 @@ You can specify the model size and other hyper-parameters through the command:
 ```
 cd [work_path]
 python training.py -m small --epoch 100 --lr 0.005 --save_dir model/weights/
-python finetune.py -m small -t Pancreas
 ```
-Note: If the number of training data samples used for fine-tuning is less than 200, the script will throw an exception. We recommend using our pre-trained parameters directly.
+You can also fine-tune the model on your own dataset:
+```
+cd [work_path]
+python finetune.py -m small --epoch 100 --lr 0.005 --save_dir model/weights_finetune/ -t [tissue]
+```
+Note: 
+- If the number of training data samples used for fine-tuning is less than 200, the script will throw an exception. We recommend using our pre-trained parameters directly.
 
 ## Processed training dataset and model weights
 |model|trained weights|parameter|processed training data|test data|

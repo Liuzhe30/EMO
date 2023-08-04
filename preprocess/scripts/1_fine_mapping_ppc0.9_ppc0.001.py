@@ -8,7 +8,7 @@ pd.set_option('display.max_columns', None)
 
 column_list = ['phenotype_id', 'variant_id', 'tss_distance', 'maf', 'ma_samples', 'ma_count', 'pval_nominal', 'slope', 'slope_se']
 
-with open("../0_gtex_list.txt") as r:
+with open("../gtex_list.txt") as r:
     lines = r.readlines()
     gtex_bulk_list = []
     for line in lines:

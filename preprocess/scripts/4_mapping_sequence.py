@@ -7,7 +7,7 @@ pd.set_option('display.max_columns', None)
 fasta_path = '../../datasets/chr_fasta_hg38/'
 file_path = '../../datasets/1_ppc_0.9_single_mutation/'
             
-with open("../0_gtex_list.txt") as r:
+with open("../gtex_list.txt") as r:
     lines = r.readlines()
     gtex_bulk_list = []
     for line in lines:

@@ -9,7 +9,7 @@ file_path2 = '../../datasets/3_ATAC_0.9_0/'
 # 3_ATAC_0.9_0: slope < 0 
 # 3_ATAC_0.9_1: slope > 0 
 
-with open("../0_gtex_list.txt") as r:
+with open("../gtex_list.txt") as r:
     lines = r.readlines()
     gtex_bulk_list = []
     for line in lines:

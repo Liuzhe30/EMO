@@ -1,0 +1,14 @@
+Naïve/Immature B Cell
+Memory B Cell
+CD4 Effector memory/TEMRA
+CD4 Naive/Central memory T cell
+CD4 SOX4 T cell
+CD8 Effector memory
+CD8 Naive/Central memory T cell
+CD8 S100B T cell
+Dendritic Cell
+Classic Monocyte
+Non-classic Monocyte
+Natural Killer Cell
+Natural Killer Recruiting Cell
+Plasma Cell

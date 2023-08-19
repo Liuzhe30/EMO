@@ -36,5 +36,6 @@ Note:
 |Data|resource|
 |:---:|:---:|
 |fine-mapping eQTL|[GTEx v8](https://gtexportal.org/home/datasets)|
-|tissue ATAC-seq|[ENCODE](https://www.encodeproject.org/atac-seq/)|
+|tissue & primary cell ATAC-seq|[EpiMap](https://personal.broadinstitute.org/cboix/epimap/metadata/Short_Metadata.html)|
 |GRCh38/hg38 genome|[UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway)|
+|singel-cell eQTL (hg19)|[OneK1K](https://onek1k.org/)|

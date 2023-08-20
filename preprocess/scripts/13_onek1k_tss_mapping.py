@@ -23,8 +23,8 @@ print(new_genome_field.head())
 new_genome_field.to_csv('../../datasets/sceQTL/clean_genome_tss.csv',index=False)
 #'''
 
-# 2 mapping TSS with chrom
-#'''
+# 2 mapping TSS with chrom and filtering the farthest TSS
+
 cell_list = ['B_Naive','CD4_memory','CD4_naive','CD8_memory','Dendritic_Cell','Natural_killer_Cell']
 genome_field = pd.read_csv('../../datasets/sceQTL/clean_genome_tss.csv')
 new_genome_field = pd.DataFrame(columns=['name', 'name2', 'chrom', 'txStart', 'txEnd'])
@@ -36,14 +36,12 @@ for cell in cell_list:
         if(pair not in check_list):
             check_list.append(pair)
             select = genome_field[(genome_field['chrom'] == 'chr' + str(data['CHR'][j])) & (genome_field['name2'] == data['GENE'][j])]
+            select.sort_values('txStart',inplace=True)
             select = select.reset_index(drop=True)
             #print(select)
-            for i in range(select.shape[0]):
-                new_genome_field.append([{'name': select['name'][i], 'name2': select['name2'][i], 'chrom': select['chrom'][i], 
+            i=0
+            if(select.shape[0] != 0): # min tss (farthest)
+                new_genome_field = new_genome_field.append([{'name': select['name'][i], 'name2': select['name2'][i], 'chrom': select['chrom'][i], 
                                         'txStart': select['txStart'][i], 'txEnd': select['txEnd'][i]}], ignore_index=True)
 print(new_genome_field)
-new_genome_field.to_csv('../../datasets/sceQTL/filtered_genome_tss.csv',index=False)
-#'''
-
-# 3 filtering the nearest TSS
-gene_list = []
+new_genome_field.to_csv('../../datasets/sceQTL/farthest_tss.csv',index=False)

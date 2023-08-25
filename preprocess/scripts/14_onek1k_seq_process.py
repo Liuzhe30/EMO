@@ -16,7 +16,10 @@ for cell in cell_list:
     data['variant_51_seq_after_mutation'] = 0
     data['seq_between_variant_tss_after_mutation'] = 0
 
+    error_id_list = []
+
     for i in range(len(data)):
+        rsid = data['RSID'][i]
         chr_str = 'chr' + str(data['CHR'][i])
         position = data['POS'][i]
         tss_position = data['TSS'][i]
@@ -28,6 +31,8 @@ for cell in cell_list:
             line = fa.readline()
             if(line[position - 1].upper() != before_mutation):
                 print('error!')
+                print(data['label'][i])
+                error_id_list.append(rsid)
 
             variant_51_seq = line[position - 26:position + 25]  
             #print(variant_51_seq)
@@ -57,5 +62,9 @@ for cell in cell_list:
             data.loc[i, 'seq_between_variant_tss'] = seq_between_variant_tss
             data.loc[i, 'variant_51_seq_after_mutation'] = variant_51_seq_after_mutation
             data.loc[i, 'seq_between_variant_tss_after_mutation'] = seq_between_variant_tss_after_mutation
+    
+    for id in error_id_list:
+        data = data.drop(data[data['RSID']==id].index)
+    data = data.reset_index(drop=True)
     print(data)
     data.to_pickle('../../datasets/sceQTL/merged/' + cell + '_seq.pkl')

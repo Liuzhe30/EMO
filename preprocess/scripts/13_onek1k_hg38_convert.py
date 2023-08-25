@@ -18,7 +18,7 @@ for cell in cell_list:
     new_data = pd.DataFrame(columns=['RSID', 'CHR', 'GENE','A1','A2','RHO'])
     for i in range(data.shape[0]):
         gene = data['GENE'][i]
-        if(gene in gene_list and np.abs(data['SPEARMANS_RHO'][i]) > 0.1):
+        if(gene in gene_list and np.abs(data['SPEARMANS_RHO'][i]) > 0.2): # update in 14_onek1k_atac_mapping.py
             new_data = new_data.append([{'RSID': data['RSID'][i], 'CHR': data['CHR'][i], 'GENE': data['GENE'][i], 
                                         'A1': data['A1'][i], 'A2': data['A2'][i], 'RHO': data['SPEARMANS_RHO'][i]}], ignore_index=True)
     print(new_data.shape[0])

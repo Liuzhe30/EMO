@@ -23,7 +23,8 @@ python finetune.py -m small --epoch 100 --lr 0.005 --save_dir model/weights_fine
 Note: 
 - If the number of training data samples used for fine-tuning is less than 200, the script will throw an exception. We recommend using our pre-trained parameters directly.
 - The parameter [tissue] is only used for distinguishing different tissues (no actual function) and can be removed in the script.
-- When fine-tuning with your own dataset, place all **Effect Allele** uniformly to one side of the mutation input branch (before mutation/after mutation) for data alignment of the representation learning.
+- When using the preprocessing scripts and the parameters of EMO to process and predict on your own dataset, place all **Reference Allele** to the "before mutation" input branch for hg38 sequence alignment.
+- When fine-tuning with your own dataset, place all **Effect Allele** to one side of the mutation input branch (before mutation/after mutation) for data alignment of the representation learning.
 
 ## Processed training dataset and model weights
 |model|trained weights|parameter|processed training data|test data|
@@ -40,3 +41,4 @@ Note:
 |tissue & primary cell ATAC-seq|[EpiMap](https://personal.broadinstitute.org/cboix/epimap/metadata/Short_Metadata.html)|
 |GRCh38/hg38 genome|[UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway)|
 |singel-cell eQTL (hg19)|[OneK1K](https://onek1k.org/)|
+|Brain tissue eQTL|[MetaBrain](https://www.metabrain.nl/)|

@@ -27,13 +27,13 @@ for cell in tissue_list:
             if(str not in gene_dict.keys() and [new_data['GENE'][i],new_data['POS'][i]] not in del_row):
                 del_row.append([new_data['GENE'][i],new_data['POS'][i]])
     for id in del_row:
-        data = new_data.drop(new_data[(new_data['GENE']==id[0]) & (new_data['POS']==id[1])].index)
-    data = data.reset_index(drop=True)
+        new_data = new_data.drop(new_data[(new_data['GENE']==id[0]) & (new_data['POS']==id[1])].index)
+    new_data = new_data.reset_index(drop=True)
 
     
-    print(data)
-    print(data['label'].value_counts())
-    data.to_pickle(file_path + cell + '_final.pkl')
+    print(new_data)
+    print(new_data['label'].value_counts())
+    new_data.to_pickle(file_path + cell + '_final.pkl')
 #'''
 
 # 2 shuffle, split dataset with sequence length

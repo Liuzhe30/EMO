@@ -9,6 +9,7 @@ model/weights_ablation/
 model/weights_finetune/
 model/weights_scfinetune/
 experiment/images/
+experiment/ignore/
 preprocess/images/
 
 # middle scripts

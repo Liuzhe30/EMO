@@ -196,7 +196,7 @@ for cell in disease_list:
             if(str not in gene_dict.keys() and [new_data['Gene'][i],new_data['pos'][i]] not in del_row):
                 del_row.append([new_data['Gene'][i],new_data['Pos'][i]])  
         for str in new_data['seq_between_variant_tss'].values[i]:
-            if(str not in gene_dict.keys() and [new_data['GENE'][i],new_data['pos'][i]] not in del_row):
+            if(str not in gene_dict.keys() and [new_data['Gene'][i],new_data['pos'][i]] not in del_row):
                 del_row.append([new_data['Gene'][i],new_data['Pos'][i]])
     for id in del_row:
         new_data = new_data.drop(new_data[(new_data['Gene']==id[0]) & (new_data['pos']==id[1])].index)

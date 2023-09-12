@@ -1,0 +1,3 @@
+Disease,RSID,Gene,tissue,label,A1,A2,chr,pos,tss
+AlzheimersDisease,rs1902660,TSPAN14,cerebellum,1,G,A,10,80503927,80454165
+ParkinsonsDisease,rs4698412,CD38,cerebellum,1,G,A,4,15735725,15778327

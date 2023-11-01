@@ -41,7 +41,9 @@ def generate_middle_output(model_size, layer_name):
 
     input_features = trainGenerator.generate_validation()[0]
     input_features[4] = np.expand_dims(input_features[4],axis=-1)
+    input_features[2] = np.expand_dims(input_features[2],axis=-1)
     npy_input = np.concatenate([input_features[3], input_features[4]], axis=-1)
+    npy_input2 = np.concatenate([input_features[0], input_features[1],input_features[2]], axis=-1)
 
     layer_output = tf.keras.models.Model(inputs=model.input,outputs=model.get_layer(layer_name).output)
     npy_out = layer_output.predict(trainGenerator.generate_validation()[0], batch_size=batch_size)  
@@ -52,6 +54,7 @@ def generate_middle_output(model_size, layer_name):
     # save prediction output
     # npy_input = np.sum(npy_input, axis=1) # for large and huge model
     np.save('model/middle_output/' + model_size + '/' + 'input.npy', npy_input)
+    np.save('model/middle_output/' + model_size + '/' + 'input2.npy', npy_input2)
     np.save('model/middle_output/' + model_size + '/' + 'output.npy', npy_out)
     np.save('model/middle_output/' + model_size + '/' + 'label.npy', label)
 

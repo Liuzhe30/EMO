@@ -8,6 +8,7 @@ model/weights_enformer/
 model/weights_ablation/
 model/weights_finetune/
 model/weights_scfinetune/
+experiment/04-enformer-comparison/images/
 experiment/images/
 experiment/ignore/
 preprocess/images/

@@ -9,6 +9,29 @@ Predicting the effect direction of non-coding mutations on  gene expression usin
 - Protobuf == 3.20
 - Scikit-learn == 1.1
 
+## Running interface
+
+```
+import numpy as np
+from src.utils import *
+
+window_len = 51
+
+# Input examples
+input_variant = 'chr1_989148_C_A' # hg38
+TSS_distance = -8903
+atac_variant = np.random.rand(window_len) # replace by real ATAC-seq array, centered on the DNA variant
+atac_between = np.random.rand(np.abs(TSS_distance) + 1) # replace by real ATAC-seq array, between TSS and the DNA variant (include both ends)
+
+# Load the path of model weights downloaded from [Cloud Storage](https://www.psymukb.net:83/EMO_Download/trained_weights/) (download all files and save to one folder), 
+# Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use. 
+# In this case, '/trained_weights/small_trained_weights.tf' will be used.
+weights_path = '...' # e.g. /trained_weights/
+
+# Get prediction output
+prediction_output = get_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, weights_path)
+```
+
 ## Training and fine-tuning
 You can specify the model size and other hyper-parameters through the command:
 ```

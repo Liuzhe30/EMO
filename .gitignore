@@ -19,3 +19,4 @@ evaluation_enformer.py
 training_ablation.py
 evaluation_ablation.py
 finetune_sc.py
+test_interface.py

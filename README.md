@@ -10,7 +10,7 @@ Predicting the effect direction of non-coding mutations on  gene expression usin
 - Scikit-learn == 1.1
 
 ## Running interface
-Please download the pretrained model weights from the [Cloud Storage](https://www.psymukb.net:83/EMO_Download/trained_weights/) (download all files and save to one folder). Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use. 
+Please download the reference genome and the pretrained model weights from the [Cloud Storage](https://www.psymukb.net:83/EMO_Download/trained_weights/) (download all weights and save to one folder). Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use. 
 
 ```python
 import numpy as np
@@ -19,17 +19,20 @@ from src.utils import *
 window_len = 51
 
 # Input examples, please replace the numpy arrays by real ATAC-seq arrays
-input_variant = 'chr1_989148_C_A' # hg38
-TSS_distance = -8903
+input_variant = 'chr19_55071925_G_A' # hg38
+TSS_distance = -95
 atac_variant = np.random.rand(window_len) # centered on the DNA variant
 atac_between = np.random.rand(np.abs(TSS_distance) + 1) # between TSS and the DNA variant (include both ends)
 
-# Load the path of model weights 
-# In this case, '/trained_weights/small_trained_weights.tf' will be used.
-weights_path = '...' # e.g. /trained_weights/
+# Define path of reference genome 
+genome_path = '/reference_genome_hg38/' # In this case, '/reference_genome_hg38/chr19.fasta' will be used.
 
-# Get prediction output
-prediction_output = get_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, weights_path)
+# Define path of pretrained model weights 
+weights_path = '/trained_weights/' # In this case, '/trained_weights/small_trained_weights.tf' will be used.
+
+# Get prediction output, this case takes about 10 seconds
+prediction_output = get_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
+prediction_output # {'score': ..., 'label': ...}
 ```
 
 ## Training and fine-tuning

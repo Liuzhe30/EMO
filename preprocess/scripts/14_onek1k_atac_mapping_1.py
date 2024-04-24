@@ -16,7 +16,7 @@ for cell in cell_list:
     data = pd.read_pickle(file_path + cell + '_seq_0.2.pkl')
     print(cell)
     
-    bw = pyBigWig.open(atac_path + cell + ".bigWig")
+    bw = pyBigWig.open(atac_path + cell + ".bw")
     data['atac_between'] = 0
     data['atac_variant_51'] = 0
     data['atac_tss_51'] = 0

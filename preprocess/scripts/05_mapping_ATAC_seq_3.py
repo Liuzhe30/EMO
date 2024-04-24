@@ -15,9 +15,9 @@ gtex_bulk_list = ['Adrenal_Gland','Breast_Mammary_Tissue','Thyroid'] # calculate
 for bulk in gtex_bulk_list:
     for chr_no in range(1, 23):
         data = pd.read_pickle(file_path + bulk + '_' + str(chr_no) + '.pkl')    
-        bw_1 = pyBigWig.open(atac_path + bulk + "_1.bigWig")
-        bw_2 = pyBigWig.open(atac_path + bulk + "_2.bigWig")
-        bw_3 = pyBigWig.open(atac_path + bulk + "_3.bigWig")
+        bw_1 = pyBigWig.open(atac_path + bulk + "_1.bw")
+        bw_2 = pyBigWig.open(atac_path + bulk + "_2.bw")
+        bw_3 = pyBigWig.open(atac_path + bulk + "_3.bw")
         max_atac_len = int(bw_1.chroms("chr" + str(chr_no)))
         #print(data)
         data['atac_between'] = 0

@@ -3,6 +3,7 @@ import pandas as pd
 from pandas import read_parquet
 import pyBigWig
 import numpy as np
+import math
 pd.set_option('display.max_columns', None)
 #pd.set_option('display.max_rows', None)
 
@@ -15,7 +16,7 @@ gtex_bulk_list = ['Adipose_Subcutaneous','Artery_Tibial','Brain_Cerebellum','Bra
 for bulk in gtex_bulk_list:
     for chr_no in range(1, 23):
         data = pd.read_pickle(file_path + bulk + '_' + str(chr_no) + '.pkl')    
-        bw = pyBigWig.open(atac_path + bulk + ".bigWig")
+        bw = pyBigWig.open(atac_path + bulk + ".bw")
         max_atac_len = int(bw.chroms("chr" + str(chr_no)))
         print(data)
         data['atac_between'] = 0
@@ -75,9 +76,9 @@ for bulk in gtex_bulk_list:
             #atac_variant_51 = [round(item, 4) for item in atac_variant_51]
             #atac_tss_51 = [round(item, 4) for item in atac_tss_51]
             
-            atac_between = atac_between.replace('nan', 0)
-            atac_variant_51 = atac_variant_51.replace('nan', 0)
-            atac_tss_51 = atac_tss_51.replace('nan', 0)
+            atac_between = [0 if math.isnan(x) else x for x in atac_between]
+            atac_variant_51 = [0 if math.isnan(x) else x for x in atac_variant_51]
+            atac_tss_51 = [0 if math.isnan(x) else x for x in atac_tss_51]
             
             data.at[i, 'atac_between'] = atac_between
             data.at[i, 'atac_variant_51'] = atac_variant_51

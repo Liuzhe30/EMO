@@ -3,6 +3,7 @@
 *.model
 *.npy
 datasets/
+datasets-old/
 model/weights/
 model/weights_enformer/
 model/weights_ablation/

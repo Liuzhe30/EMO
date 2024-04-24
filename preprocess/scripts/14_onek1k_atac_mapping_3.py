@@ -16,9 +16,9 @@ for cell in cell_list:
     data = pd.read_pickle(file_path + cell + '_seq_0.2.pkl')
     print(cell)
     
-    bw_1 = pyBigWig.open(atac_path + cell + "_1.bigWig")
-    bw_2 = pyBigWig.open(atac_path + cell + "_2.bigWig")
-    bw_3 = pyBigWig.open(atac_path + cell + "_3.bigWig")
+    bw_1 = pyBigWig.open(atac_path + cell + "_1.bw")
+    bw_2 = pyBigWig.open(atac_path + cell + "_2.bw")
+    bw_3 = pyBigWig.open(atac_path + cell + "_3.bw")
 
     data['atac_between'] = 0
     data['atac_variant_51'] = 0

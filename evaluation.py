@@ -29,7 +29,7 @@ def evaluate(target_model, data):
 
 def predicting(model_size): 
 
-    test_data = pd.read_pickle('datasets/' + model_size + '/test_' + model_size + '.pkl')
+    test_data = pd.read_pickle('datasets/' + model_size + '/test_' + model_size + '_post.pkl')
     
     # check model size
     if(model_size == 'small'):
@@ -60,6 +60,6 @@ def predicting(model_size):
 if __name__=='__main__':
 
     predicting('small')
-    predicting('middle')
-    predicting('large')
-    predicting('huge') # need large cpu memory
+    #predicting('middle')
+    #predicting('large')
+    #predicting('huge') # need large cpu memory

@@ -45,8 +45,8 @@ if __name__ == "__main__":
         os.makedirs(path)
 
     # load datasets
-    train_pkl = pd.read_pickle('datasets/' + model_size + '/train_' + model_size + '.pkl')
-    test_pkl = pd.read_pickle('datasets/' + model_size + '/test_' + model_size + '.pkl')
+    train_pkl = pd.read_pickle('datasets/' + model_size + '/train_' + model_size + '_post.pkl')
+    test_pkl = pd.read_pickle('datasets/' + model_size + '/test_' + model_size + '_post.pkl')
 
     # split train/validation
     train_data = train_pkl[0:int(train_pkl.shape[0]*float(8/9))].reset_index(drop=True)

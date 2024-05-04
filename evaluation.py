@@ -60,6 +60,6 @@ def predicting(model_size):
 if __name__=='__main__':
 
     predicting('small')
-    #predicting('middle')
-    #predicting('large')
-    #predicting('huge') # need large cpu memory
+    predicting('middle')
+    predicting('large')
+    predicting('huge') # need large cpu memory

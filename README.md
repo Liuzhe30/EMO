@@ -19,7 +19,7 @@ from src.utils import *
 window_len = 51
 
 # Input examples, please replace the numpy arrays by real ATAC-seq arrays
-input_variant = 'chr19_55071925_G_A' # hg38
+input_variant = 'chr19_55071925_G_A' # hg38, only single-point mutation accepted
 TSS_distance = -95
 atac_variant = np.random.rand(window_len) # centered on the DNA variant
 atac_between = np.random.rand(np.abs(TSS_distance) + 1) # between TSS and the DNA variant (include both ends)

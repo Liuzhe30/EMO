@@ -9,6 +9,7 @@ model/weights_enformer/
 model/weights_ablation/
 model/weights_finetune/
 model/weights_scfinetune/
+model/weights_slope/
 experiment/04-enformer-comparison/images/
 experiment/images/
 experiment/ignore/
@@ -21,3 +22,5 @@ training_ablation.py
 evaluation_ablation.py
 finetune_sc.py
 test_interface.py
+training_slope.py
+evaluation_slope.py

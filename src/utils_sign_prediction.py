@@ -11,7 +11,7 @@ from tensorflow.keras.layers import Input
 from model.EMO import *
 from src.dataGenerator import dataGenerator
 
-def get_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path):
+def get_sign_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path):
     
     # 1 prepare dataset
     chr_str = input_variant.split('_')[0]
@@ -62,7 +62,7 @@ def get_prediction_result(input_variant, TSS_distance, atac_variant, atac_betwee
         results_dict['label'] = 'Up-regulation'
     else:
         results_dict['label'] = 'Down-regulation'
-    return results_dict
+    return results_dict['label']
 
 def get_model_size(TSS_distance):
     tss_distance = np.abs(TSS_distance)

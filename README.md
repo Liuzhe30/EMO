@@ -28,11 +28,15 @@ atac_between = np.random.rand(np.abs(TSS_distance) + 1) # between TSS and the DN
 genome_path = '/reference_genome_hg38/' # In this case, '/reference_genome_hg38/chr19.fasta' will be used.
 
 # Define path of pretrained model weights 
-weights_path = '/trained_weights/' # In this case, '/trained_weights/small_trained_weights.tf' will be used.
+weights_path = '/trained_weights/' # Please put 'xx_trained_weights.tf' and 'xx_slope_weights.tf' under this path.
 
-# Get prediction output, this case takes about 10 seconds
-prediction_output = get_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
-prediction_output # {'score': ..., 'label': ...}
+# Get sign prediction output, this case takes about 10 seconds
+sign_prediction_output = get_sign_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
+sign_prediction_output # 'Up-regulation' or 'Down-regulation'
+
+# Get slope prediction output, this case takes about 10 seconds
+slope_prediction_output = get_slope_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
+slope_prediction_output # Absolute value of slope, consider labeling mutations as 'no effect' when the value is small
 ```
 
 ## Training and fine-tuning

@@ -1,4 +1,4 @@
-# class for data generate
+# class for data generation
 import pandas as pd
 import numpy as np
 import copy

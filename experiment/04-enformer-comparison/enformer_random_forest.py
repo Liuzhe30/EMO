@@ -7,9 +7,6 @@ from sklearn.ensemble import RandomForestClassifier
 compare_tissue_list = ['Adipose_Subcutaneous','Artery_Tibial','Breast_Mammary_Tissue','Colon_Transverse','Nerve_Tibial','Testis','Thyroid']
 model_size_list = ['small','middle','large']
 
-compare_tissue_list = ['Adipose_Subcutaneous']
-model_size_list = ['small']
-
 final_path = '/data/eqtl/datasets/tissue_specific/enformer_final/'
 output_path = '../prediction_results/'
 

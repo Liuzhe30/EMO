@@ -11,7 +11,6 @@ model/weights_finetune/
 model/weights_scfinetune/
 model/weights_slope/
 experiment/04-enformer-comparison/images/
-experiment/08-attention-analysis/images/
 experiment/images/
 experiment/ignore/
 preprocess/images/

@@ -14,6 +14,8 @@ experiment/04-enformer-comparison/images/
 experiment/images/
 experiment/ignore/
 preprocess/images/
+experiment/11-disease-SNP/data/
+experiment/11-disease-SNP/raw_data/
 
 # middle scripts
 training_enformer.py
@@ -24,3 +26,6 @@ finetune_sc.py
 test_interface.py
 training_slope.py
 evaluation_slope.py
+
+# other files
+*.bigWig

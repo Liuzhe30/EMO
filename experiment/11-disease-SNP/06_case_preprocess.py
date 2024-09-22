@@ -199,6 +199,7 @@ for i in range(len(data)):
 #print(data)
 data.to_pickle(output_path)
 
+# step 3, mapping ATAC-seq
 atac_path = 'hg38_ATAC/hg38_t24h_atac.bigWig'
 output_path = 'data/case/rs1893592_large_atac_t24.dataset'
 file_path = 'data/case/rs1893592_large.pkl'

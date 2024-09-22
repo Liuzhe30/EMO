@@ -38,8 +38,8 @@ for snp in snp_list:
         except FileNotFoundError:
             continue
     
-    merged_df = merged_df._append({'SNP':snp,'type':'Affected','count of TSS':delta1+delta3+delta4},ignore_index=True)
-    merged_df = merged_df._append({'SNP':snp,'type':'Unaffected','count of TSS':delta2},ignore_index=True)
+    merged_df = merged_df._append({'SNP':snp,'type':'Strong affected','count of TSS':delta1+delta3+delta4},ignore_index=True)
+    merged_df = merged_df._append({'SNP':snp,'type':'Weak affected','count of TSS':delta2},ignore_index=True)
 
 print(merged_df)
 merged_df.to_csv(output_path + 'merged_all.csv')

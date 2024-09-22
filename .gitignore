@@ -23,9 +23,17 @@ evaluation_enformer.py
 training_ablation.py
 evaluation_ablation.py
 finetune_sc.py
+evaluation_sc.py
+finetune_sc_slope.py
 test_interface.py
 training_slope.py
 evaluation_slope.py
+evaluation_finetune.py
+evaluation_causal.py
+evaluation_disease_case.py
+evaluation_slope_compare.py
+evaluation_tissue.py
+evaluation_sc_finetune.py
 
 # other files
 *.bigWig

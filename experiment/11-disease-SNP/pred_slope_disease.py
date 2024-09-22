@@ -29,8 +29,8 @@ def evaluate(target_model, data):
 
 def predicting(model_size): 
 
-    
-    
+    snp_list = ['rs2476601','rs3806624', 'rs7731626', 'rs2234067','rs2233424','rs947474','rs3824660','rs968567','rs3218251']
+
     # check model size
     if(model_size == 'small'):
         batch_size = 16
@@ -47,20 +47,27 @@ def predicting(model_size):
     model.summary()
     model.load_weights('model/weights_slope/' + model_size + '/' + model_size + '_trained_weights.tf').expect_partial()
 
+    for snp in snp_list:
+        case_data1 = pd.read_pickle('experiments/11-disease-SNP/data/atac_mapping_t0/' + snp + '_' + model_size + '.dataset')
+        if(len(case_data1) != 0):
+            testGenerator = dataGenerator(case_data1, batch_size, model_size)
+            results = model.predict(testGenerator.generate_validation()[0], batch_size=batch_size)
+            print(results)
+            
+            # save prediction output
+            np.save('experiments/11-disease-SNP/data/predition_results/' + snp + '_' + model_size + '_t0.npy', results) 
 
-    case_data1 = pd.read_pickle('experiments/11-disease-SNP/data/case/rs1893592_large_atac_t0.dataset')
-    testGenerator = dataGenerator(case_data1, batch_size, model_size)
-    results = model.predict(testGenerator.generate_validation()[0], batch_size=batch_size)
-    print(results)
-    # save prediction output
-    np.save('experiments/11-disease-SNP/data/case/predict_t0.npy', results) 
-
-    case_data2 = pd.read_pickle('experiments/11-disease-SNP/data/case/rs1893592_large_atac_t24.dataset')
-    testGenerator = dataGenerator(case_data2, batch_size, model_size)
-    results = model.predict(testGenerator.generate_validation()[0], batch_size=batch_size)
-    print(results)
-    # save prediction output
-    np.save('experiments/11-disease-SNP/data/case/predict_t24.npy', results) 
+            case_data2 = pd.read_pickle('experiments/11-disease-SNP/data/atac_mapping_t24/' + snp + '_' + model_size + '.dataset')
+            testGenerator = dataGenerator(case_data2, batch_size, model_size)
+            results = model.predict(testGenerator.generate_validation()[0], batch_size=batch_size)
+            print(results)
+            
+            # save prediction output
+            np.save('experiments/11-disease-SNP/data/predition_results/' + snp + '_' + model_size + '_t24.npy', results) 
 
 if __name__=='__main__':
-    predicting('large') 
+
+    predicting('small')
+    #predicting('middle')
+    #predicting('large')
+    #predicting('huge') # need large cpu memory

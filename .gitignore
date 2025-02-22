@@ -11,7 +11,7 @@ model/weights_finetune/
 model/weights_scfinetune/
 model/weights_slope/
 model/weights_scfinetune_slope/
-experiment/04-enformer-comparison/images/
+experiment/04-existing-methods-comparison/images/
 experiment/images/
 experiment/ignore/
 preprocess/images/
@@ -37,6 +37,7 @@ evaluation_slope_compare.py
 evaluation_tissue.py
 evaluation_sc_finetune.py
 slope_output.py
+preprocess/scripts/test.py
 
 # other files
 *.bigWig

@@ -8,7 +8,7 @@ compare_tissue_list = ['Adipose_Subcutaneous','Artery_Tibial','Breast_Mammary_Ti
 model_size_list = ['small','middle','large']
 
 final_path = '/data/eqtl/datasets/tissue_specific/enformer_final/'
-output_path = '../prediction_results/'
+output_path = 'enformer_prediction_results/'
 
 for tissue in compare_tissue_list:
     for model_size in model_size_list:

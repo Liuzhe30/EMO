@@ -42,3 +42,4 @@ preprocess/scripts/test.py
 # other files
 *.bigWig
 *.pdf
+*.txt

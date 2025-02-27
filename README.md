@@ -12,9 +12,14 @@ Predicting the regulatory impacts of non-coding variants on gene expression thro
 
 ## Running interface
 > Step 1: prepare running environment  
+```shell
+git clone https://github.com/Liuzhe30/EMO.git
+cd EMO
+
+```
 
 > Step 2: prepare the reference genome and the trained weights  
-Please download the reference genome and the pretrained model weights from the [Cloud Storage](https://www.psymukb.net:83/EMO_Download/trained_weights/) or using the following commands (download all weights and save to one folder). Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use. 
+Please download the reference genome and the pretrained model weights using the following commands.  
 ```shell
 mkdir reference_genome_hg38/
 for i in {1..22}; do
@@ -27,10 +32,10 @@ wget -c -i urls.txt -P trained_weights/
 
 > Step 3: get prediction results
 - details about model input:  
-`input_variant`:`str`(string), defined as 'chrx_VariantPosition_Ref_Alt', variant position with GRCh38/hg38 genome.  
-`TSS_distance`:`int`(integer), distance between TSS and variant, positive when the variant is downstream of the TSS, negative otherwise  
-`atac_variant`:`numpy.ndarray`(float array), real ATAC-seq number centered on the DNA variant, shape:(window_len,)  
-`atac_between`:`numpy.ndarray`(float array), real ATAC-seq number between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
+`input_variant`: `str`(string), defined as 'chrx_VariantPosition_Ref_Alt', variant position with GRCh38/hg38 genome.  
+`TSS_distance`: `int`(integer), distance between TSS and variant, positive when the variant is downstream of the TSS, negative otherwise  
+`atac_variant`: `numpy.ndarray`(float array), real ATAC-seq number centered on the DNA variant, shape:(window_len,)  
+`atac_between`: `numpy.ndarray`(float array), real ATAC-seq number between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
 - running interface:
 ```python
 import numpy as np
@@ -52,11 +57,11 @@ weights_path = 'trained_weights/' #  In this case, 'trained_weights/small_traine
 
 # Get sign prediction output, this case takes about 10 seconds
 sign_prediction_output = get_sign_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
-sign_prediction_output # 'Up-regulation' or 'Down-regulation'
+print(sign_prediction_output) # 'Up-regulation' or 'Down-regulation'
 
 # Get slope prediction output, this case takes about 10 seconds
 slope_prediction_output = get_slope_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
-slope_prediction_output # Absolute value of slope, consider labeling mutations as 'no effect' when the value is small
+print(slope_prediction_output) # Absolute value of slope, consider labeling mutations as 'no effect' when the value is small
 ```
 
 ## Training and fine-tuning

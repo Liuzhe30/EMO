@@ -11,9 +11,9 @@ Predicting the regulatory impacts of non-coding variants on gene expression thro
 - Pandas == 2.2
 
 ## Running interface
-> Step 1: prepare running environment 
+> Step 1: prepare running environment  
 
-> Step 2: prepare the reference genome and the trained weights
+> Step 2: prepare the reference genome and the trained weights  
 Please download the reference genome and the pretrained model weights from the [Cloud Storage](https://www.psymukb.net:83/EMO_Download/trained_weights/) or using the following commands (download all weights and save to one folder). Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use. 
 ```shell
 mkdir reference_genome_hg38/
@@ -26,10 +26,10 @@ wget -c -i urls.txt -P trained_weights/
 ```
 
 > Step 3: get prediction results
-- details about model input:
-`input_variant`:`str`(string), defined as 'chrx_VariantPosition_Ref_Alt', variant position with GRCh38/hg38 genome.
-`TSS_distance`:`int`(integer), distance between TSS and variant, positive when the variant is downstream of the TSS, negative otherwise
-`atac_variant`:`numpy.ndarray`(float array), real ATAC-seq number centered on the DNA variant, shape:(window_len,)
+- details about model input:  
+`input_variant`:`str`(string), defined as 'chrx_VariantPosition_Ref_Alt', variant position with GRCh38/hg38 genome.  
+`TSS_distance`:`int`(integer), distance between TSS and variant, positive when the variant is downstream of the TSS, negative otherwise  
+`atac_variant`:`numpy.ndarray`(float array), real ATAC-seq number centered on the DNA variant, shape:(window_len,)  
 `atac_between`:`numpy.ndarray`(float array), real ATAC-seq number between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
 - running interface:
 ```python

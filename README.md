@@ -5,7 +5,7 @@ Predicting the regulatory impacts of non-coding variants on gene expression thro
 
 ## Environment
 - Python == 3.9
-- Tensorflow-gpu/Tensorflow == 2.7
+- Tensorflow-gpu == 2.7
 - Protobuf == 3.20
 - Scikit-learn == 1.1
 - Pandas == 2.2
@@ -15,11 +15,13 @@ Predicting the regulatory impacts of non-coding variants on gene expression thro
 ```shell
 git clone https://github.com/Liuzhe30/EMO.git
 cd EMO
-
+conda emo_env create -f emo_env.yaml
+source activate emo_env
 ```
 
 > Step 2: prepare the reference genome and the trained weights  
-Please download the reference genome and the pretrained model weights using the following commands.  
+Please download the reference genome and the pretrained model weights using the following commands or from the Cloud Storage([genome](https://www.psymukb.net:83/EMO_Download/reference_genome_hg38/),[weights](https://www.psymukb.net:83/EMO_Download/trained_weights/)).  
+Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use.  
 ```shell
 mkdir reference_genome_hg38/
 for i in {1..22}; do
@@ -27,7 +29,7 @@ for i in {1..22}; do
 done
 
 mkdir trained_weights/
-wget -c -i urls.txt -P trained_weights/
+wget --no-check-certificate -c -i urls.txt -P trained_weights/
 ```
 
 > Step 3: get prediction results

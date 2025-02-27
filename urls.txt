@@ -1,0 +1,16 @@
+https://www.psymukb.net:83/EMO_Download/trained_weights/small/small_slope_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/small/small_slope_weights.tf.index
+https://www.psymukb.net:83/EMO_Download/trained_weights/small/small_trained_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/small/small_trained_weights.tf.index
+https://www.psymukb.net:83/EMO_Download/trained_weights/middle/middle_slope_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/middle/middle_slope_weights.tf.index
+https://www.psymukb.net:83/EMO_Download/trained_weights/middle/middle_trained_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/middle/middle_trained_weights.tf.index
+https://www.psymukb.net:83/EMO_Download/trained_weights/large/large_slope_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/large/large_slope_weights.tf.index
+https://www.psymukb.net:83/EMO_Download/trained_weights/large/large_trained_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/large/large_trained_weights.tf.index
+https://www.psymukb.net:83/EMO_Download/trained_weights/huge/huge_slope_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/huge/huge_slope_weights.tf.index
+https://www.psymukb.net:83/EMO_Download/trained_weights/huge/huge_trained_weights.tf.data-00000-of-00001
+https://www.psymukb.net:83/EMO_Download/trained_weights/huge/huge_trained_weights.tf.index

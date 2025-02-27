@@ -5,7 +5,7 @@ Predicting the regulatory impacts of non-coding variants on gene expression thro
 
 ## Environment
 - Python == 3.9
-- Tensorflow-gpu == 2.7
+- Tensorflow-gpu/Tensorflow == 2.7
 - Protobuf == 3.20
 - Scikit-learn == 1.1
 - Pandas == 2.2
@@ -36,7 +36,7 @@ wget -c -i urls.txt -P trained_weights/
 `TSS_distance`: `int`(integer), distance between TSS and variant, positive when the variant is downstream of the TSS, negative otherwise  
 `atac_variant`: `numpy.ndarray`(float array), real ATAC-seq number centered on the DNA variant, shape:(window_len,)  
 `atac_between`: `numpy.ndarray`(float array), real ATAC-seq number between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
-- running interface:
+
 ```python
 import numpy as np
 from src.utils_sign_prediction import *
@@ -47,8 +47,8 @@ window_len = 51
 # Input examples, please replace the numpy arrays by real ATAC-seq arrays
 input_variant = 'chr19_55071925_G_A' # hg38, only single-point mutation accepted
 TSS_distance = -95 # positive when the variant is downstream of the TSS, negative otherwise
-atac_variant = np.random.rand(window_len) # centered on the DNA variant, shape:(window_len,)
-atac_between = np.random.rand(np.abs(TSS_distance) + 1) # between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
+atac_variant = np.random.rand(window_len) # centered on the DNA variant, shape: (window_len,)
+atac_between = np.random.rand(np.abs(TSS_distance) + 1) # between TSS and the DNA variant (include both ends), shape: (np.abs(TSS_distance) + 1,)
 
 # Define path of reference genome 
 genome_path = 'reference_genome_hg38/' # In this case, 'reference_genome_hg38/chr19.fasta' will be used.

@@ -12,6 +12,7 @@ model/weights_scfinetune/
 model/weights_slope/
 model/weights_scfinetune_slope/
 experiment/04-existing-methods-comparison/images/
+experiment/04-existing-methods-comparison/*.txt
 experiment/images/
 experiment/ignore/
 preprocess/images/
@@ -42,4 +43,3 @@ preprocess/scripts/test.py
 # other files
 *.bigWig
 *.pdf
-*.txt

@@ -15,7 +15,7 @@ Predicting the regulatory impacts of non-coding variants on gene expression thro
 ```shell
 git clone https://github.com/Liuzhe30/EMO.git
 cd EMO
-conda emo_env create -f emo_env.yaml
+conda env create -n emo_env -f emo_env.yaml
 source activate emo_env
 ```
 

@@ -1,5 +1,5 @@
 # EMO
-Predicting the effect direction of non-coding mutations on  gene expression using deep learning
+Predicting the regulatory impacts of non-coding variants on gene expression through epigenomic integration across tissues and single-cell landscapes
 
 <p align="center"><img width="100%" src="model/EMO_structure.png" /></p>
 
@@ -11,8 +11,27 @@ Predicting the effect direction of non-coding mutations on  gene expression usin
 - Pandas == 2.2
 
 ## Running interface
-Please download the reference genome and the pretrained model weights from the [Cloud Storage](https://www.psymukb.net:83/EMO_Download/trained_weights/) (download all weights and save to one folder). Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use. 
+> Step 1: prepare running environment 
 
+> Step 2: prepare the reference genome and the trained weights
+Please download the reference genome and the pretrained model weights from the [Cloud Storage](https://www.psymukb.net:83/EMO_Download/trained_weights/) or using the following commands (download all weights and save to one folder). Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use. 
+```shell
+mkdir reference_genome_hg38/
+for i in {1..22}; do
+    wget --no-check-certificate -P reference_genome_hg38 https://www.psymukb.net:83/EMO_Download/reference_genome_hg38/chr${i}.fasta
+done
+
+mkdir trained_weights/
+wget -c -i urls.txt -P trained_weights/
+```
+
+> Step 3: get prediction results
+- details about model input:
+`input_variant`:`str`(string), defined as 'chrx_VariantPosition_Ref_Alt', variant position with GRCh38/hg38 genome.
+`TSS_distance`:`int`(integer), distance between TSS and variant, positive when the variant is downstream of the TSS, negative otherwise
+`atac_variant`:`numpy.ndarray`(float array), real ATAC-seq number centered on the DNA variant, shape:(window_len,)
+`atac_between`:`numpy.ndarray`(float array), real ATAC-seq number between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
+- running interface:
 ```python
 import numpy as np
 from src.utils_sign_prediction import *
@@ -22,15 +41,14 @@ window_len = 51
 
 # Input examples, please replace the numpy arrays by real ATAC-seq arrays
 input_variant = 'chr19_55071925_G_A' # hg38, only single-point mutation accepted
-TSS_distance = -95 # positive when variant is downstream of the TSS, negative otherwise
-atac_variant = np.random.rand(window_len) # centered on the DNA variant
-atac_between = np.random.rand(np.abs(TSS_distance) + 1) # between TSS and the DNA variant (include both ends)
+TSS_distance = -95 # positive when the variant is downstream of the TSS, negative otherwise
+atac_variant = np.random.rand(window_len) # centered on the DNA variant, shape:(window_len,)
+atac_between = np.random.rand(np.abs(TSS_distance) + 1) # between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
 
 # Define path of reference genome 
-genome_path = '/reference_genome_hg38/' # In this case, '/reference_genome_hg38/chr19.fasta' will be used.
-
+genome_path = 'reference_genome_hg38/' # In this case, 'reference_genome_hg38/chr19.fasta' will be used.
 # Define path of pretrained model weights 
-weights_path = '/trained_weights/' # Please put 'xx_trained_weights.tf' and 'xx_slope_weights.tf' under this path.
+weights_path = 'trained_weights/' #  In this case, 'trained_weights/small_trained_weights.tf' and 'trained_weights/small_slope_weights.tf' will be used.
 
 # Get sign prediction output, this case takes about 10 seconds
 sign_prediction_output = get_sign_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 

@@ -20,7 +20,7 @@ source activate emo_env
 ```
 
 > Step 2: prepare the reference genome and the trained weights  
-Please download the reference genome and the pretrained model weights using the following commands or from the Cloud Storage([genome](https://www.psymukb.net:83/EMO_Download/reference_genome_hg38/),[weights](https://www.psymukb.net:83/EMO_Download/trained_weights/)).  
+Please download the reference genome and the pretrained model weights using the following commands or from the Cloud Storage([genome](https://www.psymukb.net:83/EMO_Download/reference_genome_hg38/), [weights](https://www.psymukb.net:83/EMO_Download/trained_weights/)).  
 Please keep the same file name as when you downloaded it, and the program will automatically identify which model to use.  
 ```shell
 mkdir reference_genome_hg38/

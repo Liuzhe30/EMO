@@ -34,7 +34,7 @@ wget --no-check-certificate -c -i urls.txt -P trained_weights/
 
 > Step 3: get prediction results
 - details about model input:  
-`input_variant`: `str`(string), defined as 'chrx_VariantPosition_Ref_Alt', variant position with GRCh38/hg38 genome.  
+`input_variant`: `str`(string), defined as 'chrx_VariantPosition_Ref_Alt', variant position with GRCh38/hg38 genome, only single-point mutation accepted.  
 `TSS_distance`: `int`(integer), distance between TSS and variant, positive when the variant is downstream of the TSS, negative otherwise  
 `atac_variant`: `numpy.ndarray`(float array), real ATAC-seq number centered on the DNA variant, shape:(window_len,)  
 `atac_between`: `numpy.ndarray`(float array), real ATAC-seq number between TSS and the DNA variant (include both ends), shape:(np.abs(TSS_distance) + 1,)
@@ -99,3 +99,5 @@ Note:
 |GRCh38/hg38 genome|[UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway)|
 |singel-cell eQTL (hg19)|[OneK1K](https://onek1k.org/)|
 |Brain tissue eQTL|[MetaBrain](https://www.metabrain.nl/)|
+|Unstimulated and 24hr stimulated RA ATAC-seq|[GWAS summary statistics](http://plaza.umin.ac.jp/~yokada/datasource/software.htm)|
+|RA-associated SNPs|[GEO Series accession](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE138767)|

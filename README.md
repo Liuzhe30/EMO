@@ -99,5 +99,5 @@ Note:
 |GRCh38/hg38 genome|[UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway)|
 |singel-cell eQTL (hg19)|[OneK1K](https://onek1k.org/)|
 |Brain tissue eQTL|[MetaBrain](https://www.metabrain.nl/)|
-|Unstimulated and 24hr stimulated RA ATAC-seq|[GWAS summary statistics](http://plaza.umin.ac.jp/~yokada/datasource/software.htm)|
-|RA-associated SNPs|[GEO Series accession](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE138767)|
+|Unstimulated and 24hr stimulated RA ATAC-seq|[GEO Series accession](http://plaza.umin.ac.jp/~yokada/datasource/software.htm)|
+|RA-associated SNPs|[GWAS summary statistics](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE138767)|

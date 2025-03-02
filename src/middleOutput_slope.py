@@ -13,8 +13,8 @@ from tensorflow.keras import layers
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input
 
-from model.EMO import *
-from src.dataGenerator import dataGenerator
+from model.EMO_slope import *
+from src.dataGenerator_slope import dataGenerator
 
 def generate_middle_output(model_size, layer_name): 
 
@@ -37,7 +37,7 @@ def generate_middle_output(model_size, layer_name):
 
     trainGenerator = dataGenerator(train_data, batch_size, model_size)
 
-    model.load_weights('model/weights/' + model_size + '/' + model_size + '_trained_weights.tf').expect_partial()
+    model.load_weights('model/weights_slope/' + model_size + '/' + model_size + '_trained_weights.tf').expect_partial()
 
     input_features = trainGenerator.generate_validation()[0]
     input_features[4] = np.expand_dims(input_features[4],axis=-1)
@@ -56,10 +56,10 @@ def generate_middle_output(model_size, layer_name):
     
     # save prediction output
     # npy_input = np.sum(npy_input, axis=1) # for large and huge model
-    np.save('model/middle_output/' + model_size + '/' + 'input.npy', npy_input)
-    np.save('model/middle_output/' + model_size + '/' + 'input2.npy', npy_input2)
-    np.save('model/middle_output/' + model_size + '/' + 'output.npy', npy_out)
-    np.save('model/middle_output/' + model_size + '/' + 'label.npy', label)
+    np.save('model/middle_output_slope/' + model_size + '/' + 'input.npy', npy_input)
+    np.save('model/middle_output_slope/' + model_size + '/' + 'input2.npy', npy_input2)
+    np.save('model/middle_output_slope/' + model_size + '/' + 'output.npy', npy_out)
+    np.save('model/middle_output_slope/' + model_size + '/' + 'label.npy', label)
 
 
 if __name__=='__main__':

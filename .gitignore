@@ -39,6 +39,7 @@ evaluation_tissue.py
 evaluation_sc_finetune.py
 slope_output.py
 preprocess/scripts/test.py
+psymukb-running-interface.py
 
 # other files
 *.bigWig

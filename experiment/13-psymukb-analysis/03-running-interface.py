@@ -20,6 +20,7 @@ for disease in disease_list:
     data = pd.read_pickle('datasets/' + disease + '_post.pkl')
     for tissue in tissue_list:
         data[tissue + '_slope'] = 0
+        data[tissue + '_sign'] = 0
         for i in range(len(data)):
             chr_no = data['Chr'].values[i]
             ref = data['Ref'].values[i]
@@ -32,7 +33,9 @@ for disease in disease_list:
             atac_variant = np.array(data[tissue + '_variant'].values[i])
 
             slope_prediction_output = get_slope_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
+            sign_prediction_output = get_sign_prediction_result(input_variant, TSS_distance, atac_variant, atac_between, genome_path, weights_path) 
             data[tissue + '_slope'][i] = slope_prediction_output
+            data[tissue + '_sign'][i] = sign_prediction_output
         print(data.head())    
     print(data.head()) 
     data.to_pickle('datasets/' + disease + '_pred.pkl')

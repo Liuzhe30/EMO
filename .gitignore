@@ -11,6 +11,7 @@ model/weights_finetune/
 model/weights_scfinetune/
 model/weights_slope/
 model/weights_scfinetune_slope/
+experiment/13-psymukb-analysis/images/
 experiment/04-existing-methods-comparison/images/
 experiment/04-existing-methods-comparison/*.txt
 experiment/images/

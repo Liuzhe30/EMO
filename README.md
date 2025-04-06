@@ -97,7 +97,7 @@ Note:
 |fine-mapping eQTL|[GTEx v8](https://gtexportal.org/home/datasets)|
 |tissue & primary cell ATAC-seq (hg19)|[EpiMap](https://personal.broadinstitute.org/cboix/epimap/metadata/Short_Metadata.html)|
 |GRCh38/hg38 genome|[UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway)|
-|singel-cell eQTL (hg19)|[OneK1K](https://onek1k.org/)|
+|single-cell eQTL (hg19)|[OneK1K](https://onek1k.org/)|
 |Brain tissue eQTL|[MetaBrain](https://www.metabrain.nl/)|
 |Unstimulated and 24hr stimulated RA ATAC-seq|[GEO Series accession](http://plaza.umin.ac.jp/~yokada/datasource/software.htm)|
 |RA-associated SNPs|[GWAS summary statistics](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE138767)|

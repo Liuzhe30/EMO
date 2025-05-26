@@ -71,4 +71,4 @@ for tissue in compare_tissue_list:
                 new_df = new_df._append([{'variant_id': data_all['variant_id'][i], 'slope': data_all['slope'][i], 'result_before': result_before, 
                                                 'result_after': result_after}], ignore_index=True)
             print(new_df.head())
-            new_df.to_pickle('../../datasets/tissue_specific/enformer/' + splittype + '_' + model_size + '_' + tissue + '.pkl')
+            new_df.to_pickle('enformer_results_slope/' + splittype + '_' + model_size + '_' + tissue + '.pkl')

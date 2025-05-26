@@ -8,13 +8,13 @@ compare_tissue_list = ['Adipose_Subcutaneous', 'Artery_Tibial', 'Breast_Mammary_
                        'Colon_Transverse', 'Nerve_Tibial', 'Thyroid']
 model_size_list = ['small', 'middle']
 
-final_path = 'basenji_results_slope/'
+final_path = 'basenji2_results_slope/'
 output_path = 'basenji2_prediction_results_slope/'
 
 for tissue in compare_tissue_list:
     for model_size in model_size_list:
         # Load training data
-        train_table = pd.read_pickle(final_path + 'train_' + model_size + '_' + tissue + '.pkl')
+        train_table = pd.read_pickle(final_path + 'train_' + model_size + '_' + tissue + '_slope.pkl')
         print(train_table.head())
 
         # Prepare features and labels
@@ -37,7 +37,7 @@ for tissue in compare_tissue_list:
         reg.fit(X_train, Y_train)
 
         # Load test data
-        test_table = pd.read_pickle(final_path + 'test_' + model_size + '_' + tissue + '.pkl')
+        test_table = pd.read_pickle(final_path + 'test_' + model_size + '_' + tissue + '_slope.pkl')
         feature_list = []
         labels = np.array(test_table['slope'].astype("float"))
         for i in range(test_table.shape[0]):

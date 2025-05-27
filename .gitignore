@@ -21,6 +21,7 @@ preprocess/images/
 experiment/11-disease-SNP/data/
 experiment/11-disease-SNP/raw_data/
 experiment/12-disease-eQTL-singlecell/data/
+src/middleOutput_slope_bidirectional.py
 
 # middle scripts
 training_enformer.py

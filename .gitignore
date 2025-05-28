@@ -12,6 +12,8 @@ model/weights_scfinetune/
 model/weights_slope/
 model/weights_scfinetune_slope/
 model/weights_e2e/
+model/weights_finetune_slope/
+model/weights_e2e_slope/
 model/weights_e2e_metabrain/
 experiment/13-psymukb-analysis/images/
 experiment/04-existing-methods-comparison/images/

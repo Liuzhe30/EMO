@@ -11,6 +11,8 @@ model/weights_finetune/
 model/weights_scfinetune/
 model/weights_slope/
 model/weights_scfinetune_slope/
+model/weights_e2e/
+model/weights_e2e_metabrain/
 experiment/13-psymukb-analysis/images/
 experiment/04-existing-methods-comparison/images/
 experiment/04-existing-methods-comparison/slope_comparison/mapping.py
@@ -22,6 +24,10 @@ experiment/11-disease-SNP/data/
 experiment/11-disease-SNP/raw_data/
 experiment/12-disease-eQTL-singlecell/data/
 src/middleOutput_slope_bidirectional.py
+src/middleOutput_tissue_slope.py
+src/middleOutput_tissue_slope_test.py
+src/middleOutput_tissue_slope_e2e.py
+src/middleOutput_tissue_slope_finetune.py
 
 # middle scripts
 training_enformer.py
@@ -29,6 +35,7 @@ evaluation_enformer.py
 training_ablation.py
 evaluation_ablation.py
 finetune_sc.py
+finetune_slope.py
 evaluation_sc.py
 finetune_sc_slope.py
 test_interface.py
@@ -40,9 +47,14 @@ evaluation_disease_case.py
 evaluation_slope_compare.py
 evaluation_tissue.py
 evaluation_sc_finetune.py
+evaluation_e2e.py
 slope_output.py
 preprocess/scripts/test.py
 psymukb-running-interface.py
+e2e.py
+e2e_metabrain.py
+e2e_slope.py
+
 
 # other files
 *.bigWig

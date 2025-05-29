@@ -6,6 +6,7 @@ import pandas as pd
 pd.set_option('display.max_columns', None)
 
 import os
+import gc
 import copy
 import tensorflow as tf
 from tensorflow import keras
@@ -62,11 +63,19 @@ def generate_middle_output(model_size, layer_name):
     np.save('model/middle_output_bidirectional/' + model_size + '/' + 'output.npy', npy_out)
     np.save('model/middle_output_bidirectional/' + model_size + '/' + 'label.npy', label)
 
+    # Clear memory and TensorFlow graph
+    del model, layer_output, trainGenerator, input_features, label, npy_out
+    tf.keras.backend.clear_session()
+    gc.collect()
+
 
 if __name__=='__main__':
 
-    #generate_middle_output('small','dense_7')
-    generate_middle_output('small','bidirectional')
-    #generate_middle_output('middle','dense_7')
-    #generate_middle_output('large','dense_7')
-    #generate_middle_output('huge','dense_7') # need large cpu memory
+    tissue_list = ['Adipose_Subcutaneous','Artery_Tibial','Breast_Mammary_Tissue','Colon_Transverse','Nerve_Tibial','Thyroid']
+    
+    for tissue in tissue_list:
+        generate_middle_output('small', 'bidirectional', tissue)
+    for tissue in tissue_list:
+        generate_middle_output('middle', 'bidirectional', tissue)
+    for tissue in tissue_list:
+        generate_middle_output('large', 'bidirectional', tissue)

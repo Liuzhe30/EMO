@@ -24,6 +24,7 @@ experiment/04-existing-methods-comparison/slope_comparison/*.csv
 experiment/04-existing-methods-comparison/*.txt
 experiment/images/
 experiment/ignore/
+experiment/plot_data/
 preprocess/images/
 experiment/11-disease-SNP/data/
 experiment/11-disease-SNP/raw_data/
